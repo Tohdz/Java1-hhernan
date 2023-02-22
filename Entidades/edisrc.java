@@ -13,29 +13,24 @@ public class edisrc {
     private String nombre;
     private Integer area_construccion;
     
-    private static int nuevoId;
-    private void Contadoredificio() {
-        edisrc.nuevoId++; 
-        this.numero_ID = nuevoId;
-    }
+    
 
     public edisrc() {
     }
 
-    public edisrc(String nombre, Integer area_construccion) {
-        Contadoredificio();
+    public edisrc(Integer numero_ID, String nombre, Integer area_construccion) {
+        this.numero_ID = numero_ID;
         this.nombre = nombre;
         this.area_construccion = area_construccion;
     }
-
 
     public Integer getNumero_ID() {
         return numero_ID;
     }
 
-//    public void setNumero_ID(Integer numero_ID) {
-//        this.numero_ID = numero_ID;
-//    }
+    public void setNumero_ID(Integer numero_ID) {
+        this.numero_ID = numero_ID;
+    }
 
     public String getNombre() {
         return nombre;
