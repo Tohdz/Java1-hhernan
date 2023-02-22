@@ -38,7 +38,6 @@ public class Mainproject {
                         edificio.setNombre(JOptionPane.showInputDialog("Ingrese el nombre del Edificio: "));
                         edificio.setArea_construccion(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el area de construccion: ")));
                         edificios.add(edificio);
-                       
                         break;
                     case 1:
                         String[] ediciones = {"ID", "Nombre", "Area"};
@@ -80,7 +79,9 @@ public class Mainproject {
                         
                         break;
                     case 2:
-                        JOptionPane.showMessageDialog(null, edificios);
+                        for (int i = 0; i < edificios.size();i++) {
+                           JOptionPane.showMessageDialog(null,"ID: "+edificios.get(i).getNumero_ID()+"\n"+ "Nombre: " + edificios.get(i).getNombre()+ "\n" + "Area: " + edificios.get(i).getArea_construccion());
+                        }
                         break;
                 }
                 break;
@@ -144,7 +145,9 @@ public class Mainproject {
                         }
                         break;
                     case 2:
-                        JOptionPane.showMessageDialog(null, personas);
+                        for (int i = 0; i < personas.size();i++) {
+                           JOptionPane.showMessageDialog(null,"ID: "+personas.get(i).getNumero_ID()+"\n"+ "Nombre: " + personas.get(i).getNombre()+ "\n" + "Numero telefonico: " + personas.get(i).getNumero_telefono()+"\n"+"Correo: "+personas.get(i).getCorreo());
+                        }
                         break;
                 }
                 break;
@@ -228,7 +231,9 @@ public class Mainproject {
                         }
                         break;
                     case 2:
-                        JOptionPane.showMessageDialog(null, alquileres);
+                        for (int i = 0; i < alquileres.size();i++) {
+                           JOptionPane.showMessageDialog(null,"ID Edificio: "+alquileres.get(i).getID_edificio()+"\n"+ "ID Inquilino" + alquileres.get(i).getID_inquilino()+ "\n" + "Numero de contrato: " + alquileres.get(i).getNumero_contrato()+"\n"+"Fecha de Inicio: "+alquileres.get(i).getFecha_inicio()+"\n"+"Fecha de Vencimiento: "+alquileres.get(i).getVencimiento()+"\n"+"Mensualidad: "+alquileres.get(i).getMesualidad());
+                        }
                         break;
                 }
                 break;
@@ -236,10 +241,8 @@ public class Mainproject {
                 control=false;
                 break;
         }
-        
         }
-        
-   
     }
-    
+    public void agregar_edi(){
+    }
 }
