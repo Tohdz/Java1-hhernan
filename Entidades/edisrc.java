@@ -12,13 +12,11 @@ public class edisrc {
     private Integer numero_ID;
     private String nombre;
     private Integer area_construccion;
-    
-    
-
+  
     public edisrc() {
     }
 
-    public edisrc(Integer numero_ID, String nombre, Integer area_construccion) {
+    public edisrc(Integer numero_ID,String nombre, Integer area_construccion) {
         this.numero_ID = numero_ID;
         this.nombre = nombre;
         this.area_construccion = area_construccion;
