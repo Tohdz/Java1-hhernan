@@ -7,7 +7,8 @@ import javax.swing.JOptionPane;
 
 public class AutoControllers implements Crudinterfaces {
 
-    ArrayList<Autos> autos = new ArrayList();
+    private static ArrayList<Autos> autos = new ArrayList();
+    
 
     @Override
     public void nuevo() {
@@ -18,7 +19,9 @@ public class AutoControllers implements Crudinterfaces {
         auto.setModelo(JOptionPane.showInputDialog("Ingrese el modelo: "));
         auto.setColor(JOptionPane.showInputDialog("Ingrese el color: "));
         auto.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio: ")));
+        auto.setDispo(true);
         autos.add(auto);
+        JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo vehiculo.");
     }
 
     @Override
@@ -26,6 +29,7 @@ public class AutoControllers implements Crudinterfaces {
         for (int i = 0; i < autos.size(); i++) {
             JOptionPane.showMessageDialog(null, "Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca" + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio());
         }
+        JOptionPane.showMessageDialog(null, "Para Autos Colon es un placer servirle.");
 
     }
 
@@ -95,6 +99,7 @@ public class AutoControllers implements Crudinterfaces {
                 }
                 break;
         }
+        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente.");
     }
 
     @Override
@@ -106,7 +111,21 @@ public class AutoControllers implements Crudinterfaces {
                 break;
             }
         }
+        JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
 
+    }
+
+    public ArrayList<Autos> getAutos() {
+        return autos;
+    }
+
+    public void setAutos(ArrayList<Autos> autos) {
+        this.autos = autos;
+    }
+
+    @Override
+    public void disponibilidad() {
+        
     }
 
 }

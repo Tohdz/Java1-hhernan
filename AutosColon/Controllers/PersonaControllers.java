@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class PersonaControllers implements Crudinterfaces {
 
-    ArrayList<Personas> personas = new ArrayList();
+    private static ArrayList<Personas> personas = new ArrayList();
 
     @Override
     public void nuevo() {
@@ -16,7 +16,9 @@ public class PersonaControllers implements Crudinterfaces {
         persona.setNombre(JOptionPane.showInputDialog("Ingrese el nombre: "));
         persona.setTelefono(JOptionPane.showInputDialog("Ingrese el numero telefonico: "));
         persona.setCorreo(JOptionPane.showInputDialog("Ingrese el correo: "));
+        persona.setDispo(true);
         personas.add(persona);
+        JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo cliente.");
     }
 
     @Override
@@ -24,6 +26,7 @@ public class PersonaControllers implements Crudinterfaces {
         for (int i = 0; i < personas.size(); i++) {
             JOptionPane.showMessageDialog(null, "Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo());
         }
+        JOptionPane.showMessageDialog(null, "Para Autos Colon es un placer servirle.");
     }
 
     @Override
@@ -72,6 +75,7 @@ public class PersonaControllers implements Crudinterfaces {
                 }
                 break;
         }
+        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente.");
     }
 
     @Override
@@ -83,6 +87,20 @@ public class PersonaControllers implements Crudinterfaces {
                 break;
             }
         }
+        JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
+    }
+
+    public ArrayList<Personas> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(ArrayList<Personas> personas) {
+        this.personas = personas;
+    }
+
+    @Override
+    public void disponibilidad() {
+        
     }
 
 }

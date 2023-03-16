@@ -7,5 +7,6 @@ public interface Crudinterfaces {
     public void consulta();
     public void modificar();
     public void eliminar();
+    public void disponibilidad();
     
 }
