@@ -1,28 +1,33 @@
 package Controllers;
 
 import Crudinterfaces.Crudinterfaces;
-import Plantillas.Autos;
 import Plantillas.Ventas;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+
 public class VentaControllers implements Crudinterfaces {
 
     ArrayList<Ventas> ventas = new ArrayList();
-
+    AutoControllers autos = new AutoControllers();
+    PersonaControllers personas = new PersonaControllers();
+    
     @Override
     public void nuevo() {
         Ventas venta = new Ventas();
-        AutoControllers autos = new AutoControllers();
-        PersonaControllers personas = new PersonaControllers();
         String info="";
         String inf0="";
         for (int i = 0; i < autos.getAutos().size(); i++) {
-            info = info + ("# chasis: "+ autos.getAutos().get(i).getNumeroChasis()+ "\n");
+            if (autos.getAutos().get(i).isDispo()) {
+                info = info + ("# chasis: "+ autos.getAutos().get(i).getNumeroChasis()+ "\n");
+            } 
         }
         venta.setChasis(JOptionPane.showInputDialog("Numeros de Chasis disponibles: "+"\n"+info));
         for (int i = 0; i < personas.getPersonas().size(); i++) {
-            inf0 = inf0 + ("ID cliente: "+ personas.getPersonas().get(i).getNumeroId()+ "\n");
+            if (personas.getPersonas().get(i).isDispo()) {
+                inf0 = inf0 + ("ID cliente: "+ personas.getPersonas().get(i).getNumeroId()+ "\n"); 
+            } 
+            
         }
         venta.setIdComprador(Integer.parseInt(JOptionPane.showInputDialog("Clientes disponibles: "+"\n"+inf0)));
         for (int i = 0; i < autos.getAutos().size(); i++) {
@@ -63,6 +68,23 @@ public class VentaControllers implements Crudinterfaces {
 
     @Override
     public void disponibilidad() {
+        
+        for (int i = 0; i < autos.getAutos().size(); i++) {
+            if ((ventas.get(i).getChasis() == null ? autos.getAutos().get(i).getNumeroChasis() == null : ventas.get(i).getChasis().equals(autos.getAutos().get(i).getNumeroChasis()))) {
+                autos.getAutos().get(i).setDispo(false);
+            }else {
+                autos.getAutos().get(i).setDispo(true);
+            }
+        }
+        for (int i = 0; i < personas.getPersonas().size(); i++) {
+            if ((ventas.get(i).getIdComprador() == personas.getPersonas().get(i).getNumeroId())) {
+                personas.getPersonas().get(i).setDispo(false);
+            } else {
+                personas.getPersonas().get(i).setDispo(true);
+            }
+        }
+            
+        }
     }
 
-}
+

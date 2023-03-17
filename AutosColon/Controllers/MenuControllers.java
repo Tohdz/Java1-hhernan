@@ -54,6 +54,7 @@ public class MenuControllers {
                     switch (opcion3) {
                         case 0:
                             venta.nuevo();
+                            venta.disponibilidad();
                             break;
                         case 1:
 

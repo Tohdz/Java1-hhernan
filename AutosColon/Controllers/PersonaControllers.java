@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 public class PersonaControllers implements Crudinterfaces {
 
     private static ArrayList<Personas> personas = new ArrayList();
+    
 
     @Override
     public void nuevo() {
@@ -82,12 +83,18 @@ public class PersonaControllers implements Crudinterfaces {
     public void eliminar() {
         Integer busqueda6 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de identificacion a eliminar: "));
         for (int i = 0; i < personas.size(); i++) {
-            if (busqueda6 == personas.get(i).getNumeroId()) {
+            if (personas.get(i).isDispo()==true){
+                if (busqueda6 == personas.get(i).getNumeroId()) {
                 personas.remove(i);
                 break;
             }
+            JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");   
+            }else {
+                JOptionPane.showMessageDialog(null, "El cliente se encuentra activo.");
+            }
+ 
         }
-        JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
+        
     }
 
     public ArrayList<Personas> getPersonas() {

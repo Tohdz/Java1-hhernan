@@ -9,6 +9,7 @@ public class AutoControllers implements Crudinterfaces {
 
     private static ArrayList<Autos> autos = new ArrayList();
     
+    
 
     @Override
     public void nuevo() {
@@ -106,12 +107,17 @@ public class AutoControllers implements Crudinterfaces {
     public void eliminar() {
         String busqueda6 = JOptionPane.showInputDialog(null, "Ingrese el numero de chasis a eliminar: ");
         for (int i = 0; i < autos.size(); i++) {
-            if (busqueda6 == null ? autos.get(i).getNumeroChasis() == null : busqueda6.equals(autos.get(i).getNumeroChasis())) {
+            if (autos.get(i).isDispo()==true){
+               if (busqueda6 == null ? autos.get(i).getNumeroChasis() == null : busqueda6.equals(autos.get(i).getNumeroChasis())) {
                 autos.remove(i);
                 break;
+            } 
+            JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "El vehiculo fue vendido");
             }
         }
-        JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
+        
 
     }
 
