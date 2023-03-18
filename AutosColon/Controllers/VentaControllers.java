@@ -133,21 +133,25 @@ public class VentaControllers implements Crudinterfaces {
 
     @Override
     public void disponibilidad() {
-
-        for (int i = 0; i < autos.getAutos().size(); i++) {
-            if ((ventas.get(i).getChasis() == null ? autos.getAutos().get(i).getNumeroChasis() == null : ventas.get(i).getChasis().equals(autos.getAutos().get(i).getNumeroChasis()))) {
-                autos.getAutos().get(i).setDispo(false);
-            } else {
-                autos.getAutos().get(i).setDispo(true);
-            }
+        for (int car = 0; car < autos.getAutos().size(); car++) {
+            for (int ven = 0; ven < ventas.size(); ven++) {
+                if ((ventas.get(ven).getChasis() == null ? autos.getAutos().get(car).getNumeroChasis() == null : ventas.get(ven).getChasis().equals(autos.getAutos().get(car).getNumeroChasis()))) {
+                autos.getAutos().get(car).setDispo(false);    
+              }else{
+                autos.getAutos().get(car).setDispo(true);
+                }     
+            }   
         }
-        for (int i = 0; i < personas.getPersonas().size(); i++) {
-            if ((ventas.get(i).getIdComprador() == personas.getPersonas().get(i).getNumeroId())) {
-                personas.getPersonas().get(i).setDispo(false);
-            } else {
-                personas.getPersonas().get(i).setDispo(true);
+        
+        for (int per = 0; per < personas.getPersonas().size(); per++) {
+            for (int ven = 0; ven < ventas.size(); ven++) {
+                if ((ventas.get(ven).getIdComprador() == personas.getPersonas().get(per).getNumeroId())) {
+                personas.getPersonas().get(per).setDispo(false);
+            }else{
+                personas.getPersonas().get(per).setDispo(true);   
+                } 
             }
+            
         }
-
     }
 }

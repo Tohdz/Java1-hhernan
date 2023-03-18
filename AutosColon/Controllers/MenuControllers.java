@@ -1,6 +1,9 @@
 package Controllers;
 
 import javax.swing.JOptionPane;
+import Controllers.AutoControllers;
+import Controllers.PersonaControllers;
+import Controllers.VentaControllers;
 
 public class MenuControllers {
 
