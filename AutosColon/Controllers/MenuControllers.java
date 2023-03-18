@@ -57,7 +57,7 @@ public class MenuControllers {
                             venta.disponibilidad();
                             break;
                         case 1:
-
+                            venta.modificar();
                             break;
                         case 2:
                             venta.consulta();

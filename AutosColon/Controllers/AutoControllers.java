@@ -27,11 +27,23 @@ public class AutoControllers implements Crudinterfaces {
 
     @Override
     public void consulta() {
-        for (int i = 0; i < autos.size(); i++) {
-            JOptionPane.showMessageDialog(null, "Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca" + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio());
+        String[] ediciones = {"Individual", "Informe"};
+        int editar = JOptionPane.showOptionDialog(null, "Consultas", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, ediciones, "Individual");
+        switch (editar) {
+            case 0:
+                for (int i = 0; i < autos.size(); i++) {
+                JOptionPane.showMessageDialog(null, "Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca: " + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio());
+                }
+                break;
+            case 1:
+                String info2="";
+                for (int i = 0; i < autos.size(); i++) {
+                info2 = info2 + ("Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca: " + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio()+"\n");
+                }
+                JOptionPane.showMessageDialog(null, info2);
+                break;
         }
         JOptionPane.showMessageDialog(null, "Para Autos Colon es un placer servirle.");
-
     }
 
     @Override

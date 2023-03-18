@@ -24,8 +24,21 @@ public class PersonaControllers implements Crudinterfaces {
 
     @Override
     public void consulta() {
-        for (int i = 0; i < personas.size(); i++) {
-            JOptionPane.showMessageDialog(null, "Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo());
+        String[] ediciones = {"Individual", "Informe"};
+        int editar = JOptionPane.showOptionDialog(null, "Consultas", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, ediciones, "Individual");
+        switch (editar) {
+            case 0:
+                for (int i = 0; i < personas.size(); i++) {
+                JOptionPane.showMessageDialog(null, "Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo());
+                }
+                break;
+            case 1:
+                String info1="";
+                for (int i = 0; i < personas.size(); i++) {
+                    info1 = info1 + ("Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo()+"\n");
+                }
+                JOptionPane.showMessageDialog(null, info1);
+                break;
         }
         JOptionPane.showMessageDialog(null, "Para Autos Colon es un placer servirle.");
     }
