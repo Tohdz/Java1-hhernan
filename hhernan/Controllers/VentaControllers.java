@@ -37,13 +37,21 @@ public class VentaControllers implements Crudinterfaces {
                 info = info + ("# chasis: " + autos.getAutos().get(i).getNumeroChasis() + "\n");
             }
         }
-        venta.setChasis(JOptionPane.showInputDialog("Numeros de Chasis disponibles: " + "\n" + info));
+        try {
+            venta.setChasis(JOptionPane.showInputDialog("Numeros de Chasis disponibles: " + "\n" + info));
+        } catch (Exception e) {
+            venta.setChasis(JOptionPane.showInputDialog("Ingrese un Numeros de Chasis de la lista: " + "\n" + info));
+        }
         for (int i = 0; i < personas.getPersonas().size(); i++) {
             if (personas.getPersonas().get(i).isDispo()) {
                 inf0 = inf0 + ("ID cliente: " + personas.getPersonas().get(i).getNumeroId() + "\n");
             }
         }
-        venta.setIdComprador(Integer.parseInt(JOptionPane.showInputDialog("Clientes disponibles: " + "\n" + inf0)));
+        try {
+            venta.setIdComprador(Integer.parseInt(JOptionPane.showInputDialog("Clientes disponibles: " + "\n" + inf0)));
+        } catch (Exception e) {
+            venta.setIdComprador(Integer.parseInt(JOptionPane.showInputDialog("Ingrese los Clientes disponibles en lista: " + "\n" + inf0)));
+        }
         for (int i = 0; i < autos.getAutos().size(); i++) {
             if ((venta.getChasis() == null ? autos.getAutos().get(i).getNumeroChasis() == null : venta.getChasis().equals(autos.getAutos().get(i).getNumeroChasis()))) {
                 venta.setPrecioVenta(autos.getAutos().get(i).getPrecio());
@@ -149,26 +157,26 @@ public class VentaControllers implements Crudinterfaces {
 
     @Override
     public void disponibilidad() {
-        
+
         for (int car = 0; car < autos.getAutos().size(); car++) {
             for (int ven = 0; ven < ventas.size(); ven++) {
                 if ((ventas.get(ven).getChasis() == null ? autos.getAutos().get(car).getNumeroChasis() == null : ventas.get(ven).getChasis().equals(autos.getAutos().get(car).getNumeroChasis()))) {
-                autos.getAutos().get(car).setDispo(false);    
-              }else{
-                autos.getAutos().get(car).setDispo(true);
-                }     
-            }   
+                    autos.getAutos().get(car).setDispo(false);
+                } else {
+                    autos.getAutos().get(car).setDispo(true);
+                }
+            }
         }
-        
+
         for (int per = 0; per < personas.getPersonas().size(); per++) {
             for (int ven = 0; ven < ventas.size(); ven++) {
                 if ((ventas.get(ven).getIdComprador() == personas.getPersonas().get(per).getNumeroId())) {
-                personas.getPersonas().get(per).setDispo(false);
-            }else{
-                personas.getPersonas().get(per).setDispo(true);   
-                } 
+                    personas.getPersonas().get(per).setDispo(false);
+                } else {
+                    personas.getPersonas().get(per).setDispo(true);
+                }
             }
-            
+
         }
     }
 

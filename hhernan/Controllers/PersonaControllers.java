@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author hhern
  */
 public class PersonaControllers implements Crudinterfaces {
-    
+
     private static ArrayList<Personas> personas = new ArrayList();
 
     public static ArrayList<Personas> getPersonas() {
@@ -28,7 +28,11 @@ public class PersonaControllers implements Crudinterfaces {
     @Override
     public void nuevo() {
         Personas persona = new Personas();
-        persona.setNumeroId(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de identificacion: ")));
+        try {
+            persona.setNumeroId(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de identificacion: ")));
+        } catch (Exception e) {
+            persona.setNumeroId(Integer.parseInt(JOptionPane.showInputDialog("Valor invalido,ingrese un numero de identificacion valido: ")));
+        }
         persona.setNombre(JOptionPane.showInputDialog("Ingrese el nombre: "));
         persona.setTelefono(JOptionPane.showInputDialog("Ingrese el numero telefonico: "));
         persona.setCorreo(JOptionPane.showInputDialog("Ingrese el correo: "));
@@ -44,13 +48,13 @@ public class PersonaControllers implements Crudinterfaces {
         switch (editar) {
             case 0:
                 for (int i = 0; i < personas.size(); i++) {
-                JOptionPane.showMessageDialog(null, "Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo());
+                    JOptionPane.showMessageDialog(null, "Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo());
                 }
                 break;
             case 1:
-                String info1="";
+                String info1 = "";
                 for (int i = 0; i < personas.size(); i++) {
-                    info1 = info1 + ("Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo()+"\n");
+                    info1 = info1 + ("Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo() + "\n");
                 }
                 JOptionPane.showMessageDialog(null, info1);
                 break;
@@ -60,7 +64,7 @@ public class PersonaControllers implements Crudinterfaces {
 
     @Override
     public void modificar() {
-       String[] ediciones = {"Numero de Identificacion", "Nombre", "Telefono", "Correo"};
+        String[] ediciones = {"Numero de Identificacion", "Nombre", "Telefono", "Correo"};
         int editar = JOptionPane.showOptionDialog(null, "Editables", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, ediciones, "Numero Chasis");
         switch (editar) {
             case 0:
@@ -104,21 +108,20 @@ public class PersonaControllers implements Crudinterfaces {
                 }
                 break;
         }
-        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente."); 
+        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente.");
     }
-        
 
     @Override
     public void eliminar() {
         Integer busqueda6 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de identificacion a eliminar: "));
         for (int i = 0; i < personas.size(); i++) {
-            if (personas.get(i).isDispo()==true){
+            if (personas.get(i).isDispo() == true) {
                 if (busqueda6 == personas.get(i).getNumeroId()) {
-                personas.remove(i);
-                JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
-                break;
-            }
-            }else {
+                    personas.remove(i);
+                    JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
+                    break;
+                }
+            } else {
                 JOptionPane.showMessageDialog(null, "El cliente se encuentra activo.");
             }
         }
@@ -126,7 +129,7 @@ public class PersonaControllers implements Crudinterfaces {
 
     @Override
     public void disponibilidad() {
-        
+
     }
-    
+
 }

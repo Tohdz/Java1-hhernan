@@ -33,7 +33,11 @@ public class AutoControllers implements Crudinterfaces {
         auto.setEstilo(JOptionPane.showInputDialog("Ingrese el estilo: "));
         auto.setModelo(JOptionPane.showInputDialog("Ingrese el modelo: "));
         auto.setColor(JOptionPane.showInputDialog("Ingrese el color: "));
-        auto.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio: ")));
+        try {
+            auto.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio: ")));
+        } catch (Exception e) {
+            auto.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Valor invalido,ingrese un precio valido: ")));
+        }
         auto.setDispo(true);
         autos.add(auto);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo vehiculo.");
