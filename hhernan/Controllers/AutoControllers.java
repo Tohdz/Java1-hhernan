@@ -56,7 +56,7 @@ public class AutoControllers implements Crudinterfaces {
             case 1:
                 String info2 = "";
                 for (int i = 0; i < autos.size(); i++) {
-                    info2 = info2 + ("Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca: " + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio() + "\n");
+                    info2 = info2 + ("Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca: " + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio() + "\n"+"dato: "+autos.get(i).isDispo());
                 }
                 JOptionPane.showMessageDialog(null, info2);
                 break;
@@ -143,9 +143,8 @@ public class AutoControllers implements Crudinterfaces {
                     JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
                     break;
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "El vehiculo fue vendido");
             }
+            JOptionPane.showMessageDialog(null, "El vehiculo fue vendido");
         }
     }
 
@@ -154,4 +153,8 @@ public class AutoControllers implements Crudinterfaces {
 
     }
 
+    @Override
+    public void visualizacion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

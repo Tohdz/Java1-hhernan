@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class VentaControllers implements Crudinterfaces {
 
     private static ArrayList<Ventas> ventas = new ArrayList();
-
+    
     public static ArrayList<Ventas> getVentas() {
         return ventas;
     }
@@ -26,15 +26,17 @@ public class VentaControllers implements Crudinterfaces {
     }
     AutoControllers autos = new AutoControllers();
     PersonaControllers personas = new PersonaControllers();
+    String vista1="";
+    String vista2="";
 
     @Override
     public void nuevo() {
-        Ventas venta = new Ventas();
         String info = "";
         String inf0 = "";
-        for (int i = 0; i < autos.getAutos().size(); i++) {
-            if (autos.getAutos().get(i).isDispo()) {
-                info = info + ("# chasis: " + autos.getAutos().get(i).getNumeroChasis() + "\n");
+        Ventas venta = new Ventas();
+        for (int car = 0; car < autos.getAutos().size(); car++) {
+            if (autos.getAutos().get(car).isDispo()){
+                info = info + ("# chasis: " + autos.getAutos().get(car).getNumeroChasis() + "\n");
             }
         }
         try {
@@ -42,9 +44,9 @@ public class VentaControllers implements Crudinterfaces {
         } catch (Exception e) {
             venta.setChasis(JOptionPane.showInputDialog("Ingrese un Numeros de Chasis de la lista: " + "\n" + info));
         }
-        for (int i = 0; i < personas.getPersonas().size(); i++) {
-            if (personas.getPersonas().get(i).isDispo()) {
-                inf0 = inf0 + ("ID cliente: " + personas.getPersonas().get(i).getNumeroId() + "\n");
+        for (int per = 0; per < personas.getPersonas().size(); per++) {
+            if (personas.getPersonas().get(per).isDispo()) {
+                inf0 = inf0 + ("ID cliente: " + personas.getPersonas().get(per).getNumeroId() + "\n");
             }
         }
         try {
@@ -152,32 +154,50 @@ public class VentaControllers implements Crudinterfaces {
                 break;
             }
         }
+        for (int car = 0; car < autos.getAutos().size(); car++) {
+            for (int per = 0; per < personas.getPersonas().size(); per++) {
+                if (busqueda6 == null ? autos.getAutos().get(car).getNumeroChasis() == null : busqueda6.equals(autos.getAutos().get(car).getNumeroChasis())){
+                    autos.getAutos().get(car).setDispo(true);
+                    personas.getPersonas().get(per).setDispo(true);
+                    break;
+                }
+            }
+        }
         JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
     }
 
     @Override
     public void disponibilidad() {
-
+        
         for (int car = 0; car < autos.getAutos().size(); car++) {
             for (int ven = 0; ven < ventas.size(); ven++) {
                 if ((ventas.get(ven).getChasis() == null ? autos.getAutos().get(car).getNumeroChasis() == null : ventas.get(ven).getChasis().equals(autos.getAutos().get(car).getNumeroChasis()))) {
                     autos.getAutos().get(car).setDispo(false);
-                } else {
-                    autos.getAutos().get(car).setDispo(true);
+                    break;
                 }
             }
-        }
-
+        } 
         for (int per = 0; per < personas.getPersonas().size(); per++) {
             for (int ven = 0; ven < ventas.size(); ven++) {
                 if ((ventas.get(ven).getIdComprador() == personas.getPersonas().get(per).getNumeroId())) {
                     personas.getPersonas().get(per).setDispo(false);
-                } else {
-                    personas.getPersonas().get(per).setDispo(true);
+                    break;
                 }
             }
-
-        }
+        }  
     }
 
+    @Override
+    public void visualizacion() {
+        for (int car = 0; car < autos.getAutos().size(); car++) {
+            if (autos.getAutos().get(car).isDispo()){
+                vista1 = vista1 + ("# chasis: " + autos.getAutos().get(car).getNumeroChasis() + "\n");
+            }
+        }
+        for (int per = 0; per < personas.getPersonas().size(); per++) {
+            if (personas.getPersonas().get(per).isDispo()) {
+                vista2 = vista2 + ("ID cliente: " + personas.getPersonas().get(per).getNumeroId() + "\n");
+            }
+        }
+    }
 }

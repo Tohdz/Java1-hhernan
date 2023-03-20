@@ -71,6 +71,7 @@ public class MenuControllers {
                             break;
                         case 3:
                             venta.eliminar();
+                            venta.visualizacion();
                             break;
                     }
                     break;

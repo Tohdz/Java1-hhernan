@@ -54,7 +54,7 @@ public class PersonaControllers implements Crudinterfaces {
             case 1:
                 String info1 = "";
                 for (int i = 0; i < personas.size(); i++) {
-                    info1 = info1 + ("Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo() + "\n");
+                    info1 = info1 + ("Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo() + "\n"+"Dato: "+personas.get(i).isDispo());
                 }
                 JOptionPane.showMessageDialog(null, info1);
                 break;
@@ -121,9 +121,8 @@ public class PersonaControllers implements Crudinterfaces {
                     JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
                     break;
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "El cliente se encuentra activo.");
             }
+            JOptionPane.showMessageDialog(null, "El cliente se encuentra activo.");
         }
     }
 
@@ -132,4 +131,8 @@ public class PersonaControllers implements Crudinterfaces {
 
     }
 
+    @Override
+    public void visualizacion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

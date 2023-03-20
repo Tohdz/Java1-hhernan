@@ -19,5 +19,9 @@ public interface Crudinterfaces {
     public void eliminar();
 
     public void disponibilidad();
+    
+    public void visualizacion();
+    
+    
 
 }
