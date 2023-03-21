@@ -56,7 +56,7 @@ public class AutoControllers implements Crudinterfaces {
             case 1:
                 String info2 = "";
                 for (int i = 0; i < autos.size(); i++) {
-                    info2 = info2 + ("Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca: " + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio() + "\n"+"dato: "+autos.get(i).isDispo());
+                    info2 = info2 + ("Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca: " + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio());
                 }
                 JOptionPane.showMessageDialog(null, info2);
                 break;

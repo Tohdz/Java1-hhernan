@@ -54,7 +54,7 @@ public class PersonaControllers implements Crudinterfaces {
             case 1:
                 String info1 = "";
                 for (int i = 0; i < personas.size(); i++) {
-                    info1 = info1 + ("Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo() + "\n"+"Dato: "+personas.get(i).isDispo());
+                    info1 = info1 + ("Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo());
                 }
                 JOptionPane.showMessageDialog(null, info1);
                 break;
