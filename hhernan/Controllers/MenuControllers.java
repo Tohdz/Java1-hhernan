@@ -11,9 +11,10 @@ import javax.swing.JOptionPane;
  * @author hhern
  */
 public class MenuControllers {
+
     public void menu() {
         boolean control = true;
-        String[] opciones = {"Agregar", "Modificar", "Consultar", "Eliminar"};
+        String[] opciones = {"Agregar", "Modificar", "Consultar", "Eliminar", "Volver"};
         String[] opciones1 = {"Registro de nuevos Vehiculos", "Registro de Clientes", "Registro de Ventas", "Salir"};
         AutoControllers auto = new AutoControllers();
         PersonaControllers persona = new PersonaControllers();
@@ -37,6 +38,8 @@ public class MenuControllers {
                         case 3:
                             auto.eliminar();
                             break;
+                        case 4:
+                            break;
                     }
                     break;
                 case 1:
@@ -53,6 +56,8 @@ public class MenuControllers {
                             break;
                         case 3:
                             persona.eliminar();
+                            break;
+                        case 4:
                             break;
                     }
                     break;
@@ -73,11 +78,22 @@ public class MenuControllers {
                             venta.eliminar();
                             venta.visualizacion();
                             break;
+                        case 4:
+                            break;
                     }
                     break;
                 case 3:
-                    control = false;
-                    break;
+                    int resp = JOptionPane.showConfirmDialog(null, "Desea salir de la aplicacion?",
+                            "Confirm Message", JOptionPane.YES_NO_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE);
+                    switch (resp) {
+                        case 0:
+                            control = false;
+                            JOptionPane.showMessageDialog(null, "Gracias por su visita");
+                            break;
+                        case 1:
+                            break;
+                    }
             }
         }
     }
