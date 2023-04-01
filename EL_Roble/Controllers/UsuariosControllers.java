@@ -25,8 +25,6 @@ public class UsuariosControllers implements Crudinterfaces{
     public static void setUsuarios(ArrayList<Usuarios> aUsuarios) {
         usuarios = aUsuarios;
     }
-    
-    
 
     @Override
     public void nuevo() {
@@ -77,7 +75,7 @@ public class UsuariosControllers implements Crudinterfaces{
                 break;
             case 1:
                 String busqueda1 = JOptionPane.showInputDialog(null, "Ingrese su busqueda: ");
-                String nuevocodigo = JOptionPane.showInputDialog(null, "Ingrese el nuevo nombre: ");
+                String nuevocodigo = JOptionPane.showInputDialog(null, "Ingrese el nuevo codigo: ");
                 for (int i = 0; i < usuarios.size(); i++) {
                     if (busqueda1 == null ? usuarios.get(i).getCodigoU() == null : busqueda1.equals(usuarios.get(i).getCodigoU())) {
                         usuarios.get(i).setCodigoU(nuevocodigo);
@@ -87,7 +85,7 @@ public class UsuariosControllers implements Crudinterfaces{
                 break;
             case 2:
                 String busqueda2 = JOptionPane.showInputDialog(null, "Ingrese su busqueda: ");
-                String nuevocontra = JOptionPane.showInputDialog(null, "Ingrese el nuevo telefono: ");
+                String nuevocontra = JOptionPane.showInputDialog(null, "Ingrese la nueva contraseña: ");
                 for (int i = 0; i < usuarios.size(); i++) {
                     if (busqueda2 == null ? usuarios.get(i).getClave() == null : busqueda2.equals(usuarios.get(i).getClave())) {
                         usuarios.get(i).setClave(nuevocontra);

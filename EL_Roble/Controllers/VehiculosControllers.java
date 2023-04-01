@@ -18,15 +18,15 @@ import javax.swing.JOptionPane;
 public class VehiculosControllers implements Crudinterfaces{
     
     private static ArrayList<Vehiculos> vehiculos = new ArrayList();
-    
-    public ArrayList<Vehiculos> getVehiculos() {
+
+    public static ArrayList<Vehiculos> getVehiculos() {
         return vehiculos;
     }
 
-    public void setVehiculos(ArrayList<Vehiculos> vehiculos) {
-        this.vehiculos = vehiculos;
+    public static void setVehiculos(ArrayList<Vehiculos> aVehiculos) {
+        vehiculos = aVehiculos;
     }
-
+    
     @Override
     public void nuevo() {
         Vehiculos vehiculo = new Vehiculos();
@@ -107,7 +107,7 @@ public class VehiculosControllers implements Crudinterfaces{
                 break;
             case 4:
                 int busqueda4=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
-                int nuevopasa=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
+                int nuevopasa=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la nueva capacidad: "));
                 for (int i = 0; i < vehiculos.size(); i++) {
                     if (busqueda4 ==nuevopasa) {
                         vehiculos.get(i).setPasajeros(nuevopasa);

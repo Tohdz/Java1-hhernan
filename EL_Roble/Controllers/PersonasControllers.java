@@ -17,12 +17,12 @@ public class PersonasControllers implements Crudinterfaces {
 
     private static ArrayList<Personas> personas = new ArrayList();
 
-    public ArrayList<Personas> getPersonas() {
+    public static ArrayList<Personas> getPersonas() {
         return personas;
     }
 
-    public void setPersonas(ArrayList<Personas> personas) {
-        this.personas = personas;
+    public static void setPersonas(ArrayList<Personas> aPersonas) {
+        personas = aPersonas;
     }
 
     @Override

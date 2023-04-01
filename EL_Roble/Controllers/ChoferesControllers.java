@@ -17,13 +17,13 @@ import javax.swing.JOptionPane;
 public class ChoferesControllers implements Crudinterfaces{
     
     private static ArrayList<Choferes> choferes = new ArrayList();
-    
-    public ArrayList<Choferes> getChoferes() {
+
+    public static ArrayList<Choferes> getChoferes() {
         return choferes;
     }
 
-    public void setChoferes(ArrayList<Choferes> choferes) {
-        this.choferes = choferes;
+    public static void setChoferes(ArrayList<Choferes> aChoferes) {
+        choferes = aChoferes;
     }
 
     @Override

@@ -19,6 +19,7 @@ public class MenuControllers {
         UsuariosControllers usuarios = new UsuariosControllers();
         ChoferesControllers choferes = new ChoferesControllers(); 
         VehiculosControllers vehiculos = new VehiculosControllers();
+        ViajesControllers viajes = new ViajesControllers();
         
 
         while (control == true) {
@@ -104,16 +105,16 @@ public class MenuControllers {
                     int opcion5 = JOptionPane.showOptionDialog(null, "Registro de Viajes", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, opciones, "Consultar");
                     switch (opcion5) {
                         case 0:
-                            
+                            viajes.nuevo();
                             break;
                         case 1:
-                            
+                            viajes.modificar();
                             break;
                         case 2:
-                           
+                            viajes.consulta();
                             break;
                         case 3:
-                            
+                            viajes.eliminar();
                             break;
                         case 4:
                             break;
