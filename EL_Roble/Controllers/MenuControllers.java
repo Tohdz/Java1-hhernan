@@ -15,11 +15,13 @@ public class MenuControllers {
         boolean control = true;
         String[] opciones = {"Agregar", "Modificar", "Consultar", "Eliminar", "Volver"};
         String[] opciones1 = {"Personas", "Usuarios", "Choferes","Vehiculos","Viajes","Facturacion","Salir"};
+        String [] opciones2 ={"Venta de tiquetes","Consulta de ventas","Eliminar ventas","Validacion de espacios","Volver"};
         PersonasControllers personas = new PersonasControllers();
         UsuariosControllers usuarios = new UsuariosControllers();
         ChoferesControllers choferes = new ChoferesControllers(); 
         VehiculosControllers vehiculos = new VehiculosControllers();
         ViajesControllers viajes = new ViajesControllers();
+        TicketsControllers tickets = new TicketsControllers();
         
 
         while (control == true) {
@@ -121,19 +123,19 @@ public class MenuControllers {
                     }
                     break;
                 case 5:
-                    int opcion6 = JOptionPane.showOptionDialog(null, "Facturacion", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, opciones, "Consultar");
+                    int opcion6 = JOptionPane.showOptionDialog(null, "Facturacion", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, opciones2, "Consultar");
                     switch (opcion6) {
                         case 0:
-                            
+                            tickets.nuevo();
                             break;
                         case 1:
-                            
+                            tickets.consulta();
                             break;
                         case 2:
-                           
+                            tickets.eliminar();
                             break;
-                        case 3:
-                            
+                        case 3: 
+                           
                             break;
                         case 4:
                             break;

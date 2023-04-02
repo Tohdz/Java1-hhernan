@@ -6,7 +6,6 @@ package Controllers;
 
 import Crudinterfaces.Crudinterfaces;
 import Plantillas.Choferes;
-import Plantillas.Personas;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 

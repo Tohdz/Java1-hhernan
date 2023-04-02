@@ -6,7 +6,6 @@ package Controllers;
 
 import Crudinterfaces.Crudinterfaces;
 import Plantillas.Tickets;
-import Plantillas.Viajes;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -60,55 +59,7 @@ public class TicketsControllers implements Crudinterfaces{
 
     @Override
     public void modificar() {
-        String[] ediciones = {"Numero de Tiquete","Cantidad","Precio","Fecha","Volver"};
-        int editar = JOptionPane.showOptionDialog(null, "Editables", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, ediciones, "Numero Chasis");
-        switch (editar) {
-            case 0:
-                String busqueda0 = JOptionPane.showInputDialog(null, "Ingrese su busqueda: ");
-                String nuevoid = JOptionPane.showInputDialog(null, "Ingrese el nuevo numero de tiquete: ");
-                for (int i = 0; i < tickets.size(); i++) {
-                    if (busqueda0 == null ? tickets.get(i).getIdVT() == null : busqueda0.equals(tickets.get(i).getIdVT())) {
-                        tickets.get(i).setIdVT(nuevoid);
-                        break;
-                    }
-                }
-                break;
-            case 1:
-                int busqueda1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
-                int nuevocantidad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la nueva matricula: "));
-                for (int i = 0; i < tickets.size(); i++) {
-                    if (busqueda1 == tickets.get(i).getCantidad() ) {
-                        tickets.get(i).setCantidad(nuevocantidad);
-                        break;
-                    }
-                }
-                break;
-            case 2:
-                int busqueda2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
-                int nuevoprecio = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo chofer: "));
-                for (int i = 0; i < tickets.size(); i++) {
-                    if (busqueda2 == tickets.get(i).getPrecioV()) {
-                        tickets.get(i).setPrecioV(nuevoprecio);
-                        break;
-                    }
-                }
-                break;
-            case 3:
-                String busqueda3 = JOptionPane.showInputDialog(null, "Ingrese su busqueda: ");
-                String nuevofecha = JOptionPane.showInputDialog(null, "Ingrese la nueva fecha: ");
-                for (int i = 0; i < tickets.size(); i++) {
-                    if (busqueda3 == null ? tickets.get(i).getFechaV() == null : busqueda3.equals(tickets.get(i).getFechaV())) {
-                        tickets.get(i).setFechaV(nuevofecha);
-                        break;
-                    }
-                }
-                break;
-            case 4:
-                break;
-        }
-        if (editar!=4){
-            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente.");
-        }
+        
     }
 
     @Override

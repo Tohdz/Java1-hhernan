@@ -5,7 +5,6 @@
 package Controllers;
 
 import Crudinterfaces.Crudinterfaces;
-import Plantillas.Personas;
 import Plantillas.Usuarios;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -32,7 +31,6 @@ public class UsuariosControllers implements Crudinterfaces{
         usuario.setIdU(JOptionPane.showInputDialog("Ingrese el numero de identificacion: "));
         usuario.setCodigoU(JOptionPane.showInputDialog("Ingrese el codigo de usuario: "));
         usuario.setClave(JOptionPane.showInputDialog("Ingrese la clave: "));
-        
         usuarios.add(usuario);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo usuario.");
     }
@@ -115,7 +113,11 @@ public class UsuariosControllers implements Crudinterfaces{
 
     @Override
     public void disponibilidad() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Usuarios usuario = new Usuarios();
+        usuario.setIdU("115470088");
+        usuario.setCodigoU("0693");
+        usuario.setClave("to0693*");
+        usuarios.add(usuario);
     }
 
     @Override

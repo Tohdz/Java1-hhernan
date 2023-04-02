@@ -16,20 +16,24 @@ public class Viajes {
     private String fechaV;
     private String destino;
     private int capacidad;
+    private int ventacapacidad;
     private int precio;
 
     public Viajes() {
     }
 
-    public Viajes(String idV, String placaV, String idChof, String fechaV, String destino, int capacidad, int precio) {
+    public Viajes(String idV, String placaV, String idChof, String fechaV, String destino, int capacidad, int ventacapacidad, int precio) {
         this.idV = idV;
         this.placaV = placaV;
         this.idChof = idChof;
         this.fechaV = fechaV;
         this.destino = destino;
         this.capacidad = capacidad;
+        this.ventacapacidad = ventacapacidad;
         this.precio = precio;
     }
+
+    
 
     public String getIdV() {
         return idV;
@@ -90,5 +94,13 @@ public class Viajes {
     @Override
     public String toString() {
         return "Viajes{" + "idV=" + idV + ", placaV=" + placaV + ", idChof=" + idChof + ", fechaV=" + fechaV + ", destino=" + destino + ", capacidad=" + capacidad + ", precio=" + precio + '}';
+    }
+
+    public int getVentacapacidad() {
+        return ventacapacidad;
+    }
+
+    public void setVentacapacidad(int ventacapacidad) {
+        this.ventacapacidad = ventacapacidad;
     }
 }

@@ -5,7 +5,6 @@
 package Controllers;
 
 import Crudinterfaces.Crudinterfaces;
-import Plantillas.Vehiculos;
 import Plantillas.Viajes;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -14,16 +13,16 @@ import javax.swing.JOptionPane;
  *
  * @author hhern
  */
-public class ViajesControllers implements Crudinterfaces{
-    
+public class ViajesControllers implements Crudinterfaces {
+
     private static ArrayList<Viajes> viajes = new ArrayList();
 
-    public static ArrayList<Viajes> getVehiculos() {
+    public static ArrayList<Viajes> getViajes() {
         return viajes;
     }
 
-    public static void setVehiculos(ArrayList<Viajes> aVehiculos) {
-        viajes = aVehiculos;
+    public static void setViajes(ArrayList<Viajes> aViajes) {
+        viajes = aViajes;
     }
 
     @Override
@@ -35,7 +34,8 @@ public class ViajesControllers implements Crudinterfaces{
         viaje.setFechaV(JOptionPane.showInputDialog("Ingrese la fecha de viaje: "));
         viaje.setDestino(JOptionPane.showInputDialog("Ingrese el destino: "));
         viaje.setCapacidad(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de personas: ")));
-        viaje.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio del viaje: ")));
+        viaje.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio del tiquete: ")));
+        viaje.setVentacapacidad(0);
         viajes.add(viaje);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo viaje.");
     }
@@ -47,13 +47,13 @@ public class ViajesControllers implements Crudinterfaces{
         switch (editar) {
             case 0:
                 for (int i = 0; i < viajes.size(); i++) {
-                    JOptionPane.showMessageDialog(null, "Numero de viajes: " + viajes.get(i).getIdV() + "\n" + "Matricula: " + viajes.get(i).getPlacaV() + "\n"+ "ID de Chofer: " + viajes.get(i).getIdChof() + "\n"+ "Fecha de viaje: " + viajes.get(i).getFechaV() + "\n"+ "Destino: " + viajes.get(i).getDestino() + "\n"+ "Capacidad: " + viajes.get(i).getCapacidad() + "\n"+ "Precio: " + viajes.get(i).getPrecio() + "\n");
+                    JOptionPane.showMessageDialog(null, "Numero de viajes: " + viajes.get(i).getIdV() + "\n" + "Matricula: " + viajes.get(i).getPlacaV() + "\n" + "ID de Chofer: " + viajes.get(i).getIdChof() + "\n" + "Fecha de viaje: " + viajes.get(i).getFechaV() + "\n" + "Destino: " + viajes.get(i).getDestino() + "\n" + "Capacidad: " + viajes.get(i).getCapacidad() + "\n" + "Precio: " + viajes.get(i).getPrecio() + "\n");
                 }
                 break;
             case 1:
                 String info1 = "";
                 for (int i = 0; i < viajes.size(); i++) {
-                    info1 = info1 + ("Numero de viajes: " + viajes.get(i).getIdV() + "\n" + "Matricula: " + viajes.get(i).getPlacaV() + "\n"+ "ID de Chofer: " + viajes.get(i).getIdChof() + "\n"+ "Fecha de viaje: " + viajes.get(i).getFechaV() + "\n"+ "Destino: " + viajes.get(i).getDestino() + "\n"+ "Capacidad: " + viajes.get(i).getCapacidad() + "\n"+ "Precio: " + viajes.get(i).getPrecio() + "\n");
+                    info1 = info1 + ("Numero de viajes: " + viajes.get(i).getIdV() + "\n" + "Matricula: " + viajes.get(i).getPlacaV() + "\n" + "ID de Chofer: " + viajes.get(i).getIdChof() + "\n" + "Fecha de viaje: " + viajes.get(i).getFechaV() + "\n" + "Destino: " + viajes.get(i).getDestino() + "\n" + "Capacidad: " + viajes.get(i).getCapacidad() + "\n" + "Precio: " + viajes.get(i).getPrecio() + "\n");
                 }
                 JOptionPane.showMessageDialog(null, info1);
                 break;
@@ -63,7 +63,7 @@ public class ViajesControllers implements Crudinterfaces{
 
     @Override
     public void modificar() {
-        String[] ediciones = {"Numero de viaje","Vehiculo de viaje","Chofer de viaje","Fecha viaje","Destino","Capacidad","Precio","Volver"};
+        String[] ediciones = {"Numero de viaje", "Vehiculo de viaje", "Chofer de viaje", "Fecha viaje", "Destino", "Capacidad", "Precio", "Volver"};
         int editar = JOptionPane.showOptionDialog(null, "Editables", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, ediciones, "Numero Chasis");
         switch (editar) {
             case 0:
@@ -117,20 +117,20 @@ public class ViajesControllers implements Crudinterfaces{
                 }
                 break;
             case 5:
-                int busqueda5=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
-                int nuevocapa=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la nueva capacidad: "));
+                int busqueda5 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
+                int nuevocapa = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la nueva capacidad: "));
                 for (int i = 0; i < viajes.size(); i++) {
-                    if (busqueda5 ==nuevocapa) {
+                    if (busqueda5 == viajes.get(i).getCapacidad()) {
                         viajes.get(i).setCapacidad(nuevocapa);
                         break;
                     }
                 }
                 break;
             case 6:
-                int busqueda6=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
-                int nuevoprecio=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo precio: "));
+                int busqueda6 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
+                int nuevoprecio = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo precio: "));
                 for (int i = 0; i < viajes.size(); i++) {
-                    if (busqueda6 ==nuevoprecio) {
+                    if (busqueda6 == viajes.get(i).getPrecio()) {
                         viajes.get(i).setPrecio(nuevoprecio);
                         break;
                     }
@@ -139,7 +139,7 @@ public class ViajesControllers implements Crudinterfaces{
             case 7:
                 break;
         }
-        if (editar!=7){
+        if (editar != 7) {
             JOptionPane.showMessageDialog(null, "Se ha modificado correctamente.");
         }
     }
@@ -158,12 +158,12 @@ public class ViajesControllers implements Crudinterfaces{
 
     @Override
     public void disponibilidad() {
-        
+
     }
 
     @Override
     public void visualizacion() {
-        
+
     }
-    
+
 }
