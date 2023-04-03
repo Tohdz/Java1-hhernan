@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 public class TicketsControllers implements Crudinterfaces{
     
     private static ArrayList<Tickets> tickets = new ArrayList();
+    
+    ViajesControllers viajes = new ViajesControllers();
 
     public static ArrayList<Tickets> getTickets() {
         return tickets;
@@ -28,9 +30,19 @@ public class TicketsControllers implements Crudinterfaces{
     @Override
     public void nuevo() {
         Tickets ticket = new Tickets();
-        ticket.setIdVT(JOptionPane.showInputDialog("Ingrese el numero de ticket: "));
+        String info="";
+        double iva=0.13;
+        for (int i = 0; i < viajes.getViajes().size(); i++) {
+            info=info+("Numero de viaje:"+viajes.getViajes().get(i).getIdV()+"\n"+"Destino:"+viajes.getViajes().get(i).getDestino());
+        }
+        ticket.setIdVT(JOptionPane.showInputDialog(info + "Ingrese el numero de viaje: "));
         ticket.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de tiquetes: ")));
-        ticket.setPrecioV(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio: ")));
+        for (int v = 0; v < viajes.getViajes().size(); v++) {
+            if ((ticket.getIdVT() == null ? viajes.getViajes().get(v).getIdV() == null : ticket.getIdVT().equals(viajes.getViajes().get(v).getIdV()))){
+                    ticket.setPrecioV(viajes.getViajes().get(v).getPrecio());
+                }
+            } 
+        ticket.setTotaliva((int)((ticket.getPrecioV()*ticket.getCantidad())*iva)+(ticket.getPrecioV()*ticket.getCantidad()));
         ticket.setFechaV(JOptionPane.showInputDialog("Ingrese la fecha: "));
         tickets.add(ticket);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo viaje.");

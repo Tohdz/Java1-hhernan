@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
 public class ViajesControllers implements Crudinterfaces {
 
     private static ArrayList<Viajes> viajes = new ArrayList();
+    
+    VehiculosControllers vehiculo = new VehiculosControllers();
+    ChoferesControllers choferes = new ChoferesControllers();
 
     public static ArrayList<Viajes> getViajes() {
         return viajes;
@@ -29,11 +32,27 @@ public class ViajesControllers implements Crudinterfaces {
     public void nuevo() {
         Viajes viaje = new Viajes();
         viaje.setIdV(JOptionPane.showInputDialog("Ingrese el numero de viaje: "));
-        viaje.setPlacaV(JOptionPane.showInputDialog("Ingrese la matricula del vehiculo: "));
-        viaje.setIdChof(JOptionPane.showInputDialog("Ingrese el ID de chofer: "));
-        viaje.setFechaV(JOptionPane.showInputDialog("Ingrese la fecha de viaje: "));
+        String placas="";
+        for (int i = 0; i < vehiculo.getVehiculos().size(); i++) {
+            placas=placas+("Numero de matricula: " + vehiculo.getVehiculos().get(i).getPlaca() + "\n");
+        }
+        viaje.setPlacaV(JOptionPane.showInputDialog(placas + "Ingrese la matricula del vehiculo: "));
+        String conductores="";
+        for (int i = 0; i < choferes.getChoferes().size(); i++) {
+            conductores=conductores+("Conductores:"+choferes.getChoferes().get(i).getIdC()+"\n");
+        }
+        viaje.setIdChof(JOptionPane.showInputDialog(conductores + "Ingrese el ID de chofer: "));
+        String info="";
+        for (int i = 0; i < viajes.size(); i++) {
+            info =info+("Fecha reservada:"+viajes.get(i).getFechaV()+"\n");
+        }
+        viaje.setFechaV(JOptionPane.showInputDialog(info + "Ingrese la fecha de viaje: "));
         viaje.setDestino(JOptionPane.showInputDialog("Ingrese el destino: "));
-        viaje.setCapacidad(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de personas: ")));
+        for (int i = 0; i < vehiculo.getVehiculos().size(); i++) {
+            if ((viaje.getPlacaV() == null ? vehiculo.getVehiculos().get(i).getPlaca() == null : viaje.getPlacaV().equals(vehiculo.getVehiculos().get(i).getPlaca()))){
+                viaje.setCapacidad(vehiculo.getVehiculos().get(i).getPasajeros());
+                }
+        }
         viaje.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio del tiquete: ")));
         viaje.setVentacapacidad(0);
         viajes.add(viaje);
