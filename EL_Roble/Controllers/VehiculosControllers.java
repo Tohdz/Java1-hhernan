@@ -27,12 +27,23 @@ public class VehiculosControllers implements Crudinterfaces{
     
     @Override
     public void nuevo() {
-        Vehiculos vehiculo = new Vehiculos();
-        vehiculo.setPlaca(JOptionPane.showInputDialog("Ingrese el numero de matricula: "));
-        vehiculo.setMarca(JOptionPane.showInputDialog("Ingrese la marca: "));
-        vehiculo.setEstilo(JOptionPane.showInputDialog("Ingrese el estilo: "));
-        vehiculo.setAño(JOptionPane.showInputDialog("Ingrese el año: "));
-        vehiculo.setPasajeros(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de personas: ")));
+        String placa;
+        String marca;
+        String estilo;
+        String año;
+        int pasajeros=0;
+        placa=JOptionPane.showInputDialog("Ingrese el numero de matricula: ");
+        marca=JOptionPane.showInputDialog("Ingrese la marca: ");
+        estilo=JOptionPane.showInputDialog("Ingrese el estilo: ");
+        año=JOptionPane.showInputDialog("Ingrese el año: ");
+        do{
+            try{
+                pasajeros=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de personas: "));
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Ingrese un valor valido");
+            }
+        }while(pasajeros<=0);
+        Vehiculos vehiculo = new Vehiculos(placa, marca, estilo, año, pasajeros);
         vehiculos.add(vehiculo);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo vehiculo.");
     }

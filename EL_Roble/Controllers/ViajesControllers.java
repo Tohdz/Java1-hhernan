@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class ViajesControllers implements Crudinterfaces {
 
     private static ArrayList<Viajes> viajes = new ArrayList();
-    
+
     VehiculosControllers vehiculo = new VehiculosControllers();
     ChoferesControllers choferes = new ChoferesControllers();
 
@@ -30,31 +30,46 @@ public class ViajesControllers implements Crudinterfaces {
 
     @Override
     public void nuevo() {
-        Viajes viaje = new Viajes();
-        viaje.setIdV(JOptionPane.showInputDialog("Ingrese el numero de viaje: "));
-        String placas="";
+        String idV;
+        String placaV;
+        String idChof;
+        String fechaV;
+        String destino;
+        int capacidad = 0;
+        int ventacapacidad;
+        int precio = 0;
+
+        idV = JOptionPane.showInputDialog("Ingrese el numero de viaje: ");
+        String placas = "";
         for (int i = 0; i < vehiculo.getVehiculos().size(); i++) {
-            placas=placas+("Numero de matricula: " + vehiculo.getVehiculos().get(i).getPlaca() + "\n");
+            placas = placas + ("Numero de matricula: " + vehiculo.getVehiculos().get(i).getPlaca() + "\n");
         }
-        viaje.setPlacaV(JOptionPane.showInputDialog(placas + "Ingrese la matricula del vehiculo: "));
-        String conductores="";
+        placaV = JOptionPane.showInputDialog(placas + "Ingrese la matricula del vehiculo: ");
+        String conductores = "";
         for (int i = 0; i < choferes.getChoferes().size(); i++) {
-            conductores=conductores+("Conductores:"+choferes.getChoferes().get(i).getIdC()+"\n");
+            conductores = conductores + ("Conductores:" + choferes.getChoferes().get(i).getIdC() + "\n");
         }
-        viaje.setIdChof(JOptionPane.showInputDialog(conductores + "Ingrese el ID de chofer: "));
-        String info="";
+        idChof = JOptionPane.showInputDialog(conductores + "Ingrese el ID de chofer: ");
+        String info = "";
         for (int i = 0; i < viajes.size(); i++) {
-            info =info+("Fecha reservada:"+viajes.get(i).getFechaV()+"\n");
+            info = info + ("Fecha reservada:" + viajes.get(i).getFechaV() + "\n");
         }
-        viaje.setFechaV(JOptionPane.showInputDialog(info + "Ingrese la fecha de viaje: "));
-        viaje.setDestino(JOptionPane.showInputDialog("Ingrese el destino: "));
+        fechaV = JOptionPane.showInputDialog(info + "Ingrese la fecha de viaje: ");
+        destino = JOptionPane.showInputDialog("Ingrese el destino: ");
         for (int i = 0; i < vehiculo.getVehiculos().size(); i++) {
-            if ((viaje.getPlacaV() == null ? vehiculo.getVehiculos().get(i).getPlaca() == null : viaje.getPlacaV().equals(vehiculo.getVehiculos().get(i).getPlaca()))){
-                viaje.setCapacidad(vehiculo.getVehiculos().get(i).getPasajeros());
-                }
+            if ((placaV == null ? vehiculo.getVehiculos().get(i).getPlaca() == null : placaV.equals(vehiculo.getVehiculos().get(i).getPlaca()))) {
+                capacidad = vehiculo.getVehiculos().get(i).getPasajeros();
+            }
         }
-        viaje.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio del tiquete: ")));
-        viaje.setVentacapacidad(0);
+        do {
+            try {
+                precio = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio del tiquete: "));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un precio valido.");
+            }
+        } while (precio <= 0);
+        ventacapacidad = 0;
+        Viajes viaje = new Viajes(idV, placaV, idChof, fechaV, destino, capacidad, ventacapacidad, precio);
         viajes.add(viaje);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo viaje.");
     }

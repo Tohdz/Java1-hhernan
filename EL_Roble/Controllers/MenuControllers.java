@@ -135,7 +135,7 @@ public class MenuControllers {
                             tickets.eliminar();
                             break;
                         case 3: 
-                           
+                            tickets.modificar();
                             break;
                         case 4:
                             break;
