@@ -157,6 +157,7 @@ public class AutoControllers implements Crudinterfaces {
                     JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
                     break;
                 }
+                break;
             }
             JOptionPane.showMessageDialog(null, "El vehiculo fue vendido");
         }
