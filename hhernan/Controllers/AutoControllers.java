@@ -27,18 +27,32 @@ public class AutoControllers implements Crudinterfaces {
 
     @Override
     public void nuevo() {
-        Autos auto = new Autos();
-        auto.setNumeroChasis(JOptionPane.showInputDialog("Ingrese el numero de chasis: "));
-        auto.setMarca(JOptionPane.showInputDialog("Ingrese la marca: "));
-        auto.setEstilo(JOptionPane.showInputDialog("Ingrese el estilo: "));
-        auto.setModelo(JOptionPane.showInputDialog("Ingrese el modelo: "));
-        auto.setColor(JOptionPane.showInputDialog("Ingrese el color: "));
-        try {
-            auto.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio: ")));
-        } catch (Exception e) {
-            auto.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Valor invalido,ingrese un precio valido: ")));
+        String numeroChasis;
+        String marca;
+        String estilo;
+        String modelo;
+        String color;
+        int precio = 0;
+        boolean dispo;
+        numeroChasis = JOptionPane.showInputDialog("Ingrese el numero de chasis: ");
+        for (int i = 0; i < autos.size(); i++) {
+            if (numeroChasis == null ? autos.get(i).getNumeroChasis() == null : numeroChasis.equals(autos.get(i).getNumeroChasis())) {
+                numeroChasis = JOptionPane.showInputDialog("El valor ya existe, Ingrese un numero de chasis valido: ");
+            }
         }
-        auto.setDispo(true);
+        marca = JOptionPane.showInputDialog("Ingrese la marca: ");
+        estilo = JOptionPane.showInputDialog("Ingrese el estilo: ");
+        modelo = JOptionPane.showInputDialog("Ingrese el modelo: ");
+        color = JOptionPane.showInputDialog("Ingrese el color: ");
+        do {
+            try {
+                precio = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el precio: "));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Valor invalido,ingrese un precio valido: ");
+            }
+        } while (precio <= 0);
+        dispo = true;
+        Autos auto = new Autos(numeroChasis, marca, estilo, modelo, color, precio, dispo);
         autos.add(auto);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo vehiculo.");
     }
@@ -56,7 +70,7 @@ public class AutoControllers implements Crudinterfaces {
             case 1:
                 String info2 = "";
                 for (int i = 0; i < autos.size(); i++) {
-                    info2 = info2 + ("Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca: " + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio());
+                    info2 = info2 + ("Numero de Chasis: " + autos.get(i).getNumeroChasis() + "\n" + "Marca: " + autos.get(i).getMarca() + "\n" + "Estilo: " + autos.get(i).getEstilo() + "\n" + "Modelo: " + autos.get(i).getModelo() + "\n" + "Color: " + autos.get(i).getColor() + "\n" + "Precio: " + autos.get(i).getPrecio() + "\n");
                 }
                 JOptionPane.showMessageDialog(null, info2);
                 break;

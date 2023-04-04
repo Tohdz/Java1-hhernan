@@ -27,16 +27,29 @@ public class PersonaControllers implements Crudinterfaces {
 
     @Override
     public void nuevo() {
-        Personas persona = new Personas();
-        try {
-            persona.setNumeroId(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de identificacion: ")));
-        } catch (Exception e) {
-            persona.setNumeroId(Integer.parseInt(JOptionPane.showInputDialog("Valor invalido,ingrese un numero de identificacion valido: ")));
+
+        int numeroId = 0;
+        String nombre;
+        String telefono;
+        String correo;
+        boolean dispo;
+        do {
+            try {
+                numeroId = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de identificacion: "));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Valor invalido,ingrese un numero de identificacion valido: ");
+            }
+        } while (numeroId <= 0);
+        for (int i = 0; i < personas.size(); i++) {
+            if (numeroId == personas.get(i).getNumeroId()) {
+                numeroId = Integer.parseInt(JOptionPane.showInputDialog("El valor ya existe, Ingrese el numero de identificacion valido: "));          
+            }
         }
-        persona.setNombre(JOptionPane.showInputDialog("Ingrese el nombre: "));
-        persona.setTelefono(JOptionPane.showInputDialog("Ingrese el numero telefonico: "));
-        persona.setCorreo(JOptionPane.showInputDialog("Ingrese el correo: "));
-        persona.setDispo(true);
+        nombre = JOptionPane.showInputDialog("Ingrese el nombre: ");
+        telefono = JOptionPane.showInputDialog("Ingrese el numero telefonico: ");
+        correo = JOptionPane.showInputDialog("Ingrese el correo: ");
+        dispo = true;
+        Personas persona = new Personas(numeroId, nombre, telefono, correo, dispo);
         personas.add(persona);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo cliente.");
     }
@@ -54,7 +67,7 @@ public class PersonaControllers implements Crudinterfaces {
             case 1:
                 String info1 = "";
                 for (int i = 0; i < personas.size(); i++) {
-                    info1 = info1 + ("Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo());
+                    info1 = info1 + ("Numero de Identificacion: " + personas.get(i).getNumeroId() + "\n" + "Nombre: " + personas.get(i).getNombre() + "\n" + "Numero de telefono: " + personas.get(i).getTelefono() + "\n" + "Correo: " + personas.get(i).getCorreo() + "\n");
                 }
                 JOptionPane.showMessageDialog(null, info1);
                 break;
