@@ -29,12 +29,19 @@ public class ChoferesControllers implements Crudinterfaces{
     @Override
     public void nuevo() {
         String info="";
-        Choferes chofer = new Choferes();
+        String idC;
+        String vencimientoL;
         for (int v = 0; v < personas.getPersonas().size(); v++) {
             info = info + ("Numero de id:" + personas.getPersonas().get(v).getId() + "\n");
         }
-        chofer.setIdC(JOptionPane.showInputDialog(info+"Ingrese el numero de identificacion: "));
-        chofer.setVencimientoL(JOptionPane.showInputDialog("Ingrese la fecha de vencimiento de su permiso: "));
+        idC=JOptionPane.showInputDialog(info+"Ingrese el numero de identificacion: ");
+        for (int i = 0; i < choferes.size(); i++) {
+            if (idC == null ? choferes.get(i).getIdC() == null : idC.equals(choferes.get(i).getIdC())) {
+                idC = JOptionPane.showInputDialog("El id ya existe, Ingrese un id valido: ");
+            }
+        }
+        vencimientoL=JOptionPane.showInputDialog("Ingrese la fecha de vencimiento de su permiso: ");
+        Choferes chofer = new Choferes(idC, vencimientoL);
         choferes.add(chofer);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo conductor.");
     }

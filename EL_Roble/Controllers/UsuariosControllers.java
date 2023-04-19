@@ -35,6 +35,11 @@ public class UsuariosControllers implements Crudinterfaces{
             info = info + ("Numero de id:" + personas.getPersonas().get(v).getId() + "\n");
         }
         idU=JOptionPane.showInputDialog(info+"Ingrese el numero de identificacion: ");
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (idU == null ? usuarios.get(i).getIdU() == null : idU.equals(usuarios.get(i).getIdU())) {
+                idU = JOptionPane.showInputDialog("El id ya existe, Ingrese un id valido: ");
+            }
+        }
         String codigoU=JOptionPane.showInputDialog("Ingrese el codigo de usuario: ");
         String clave=JOptionPane.showInputDialog("Ingrese la clave: ");
         Usuarios usuario = new Usuarios(idU, codigoU, clave);

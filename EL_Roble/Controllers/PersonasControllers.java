@@ -17,7 +17,6 @@ public class PersonasControllers implements Crudinterfaces {
 
     private static ArrayList<Personas> personas = new ArrayList();
 
-
     public static ArrayList<Personas> getPersonas() {
         return personas;
     }
@@ -28,11 +27,20 @@ public class PersonasControllers implements Crudinterfaces {
 
     @Override
     public void nuevo() {
-        Personas persona = new Personas();
-        persona.setId(JOptionPane.showInputDialog("Ingrese el numero de identificacion: "));
-        persona.setNombre(JOptionPane.showInputDialog("Ingrese el nombre: "));
-        persona.setTelefono(JOptionPane.showInputDialog("Ingrese el numero telefonico: "));
-        persona.setCorreo(JOptionPane.showInputDialog("Ingrese el correo: "));
+        String id;
+        String nombre;
+        String telefono;
+        String correo;
+        id = JOptionPane.showInputDialog("Ingrese el numero de identificacion: ");
+        for (int i = 0; i < personas.size(); i++) {
+            if (id == null ? personas.get(i).getId() == null : id.equals(personas.get(i).getId())) {
+                id = JOptionPane.showInputDialog("El id ya existe, Ingrese un id valido: ");
+            }
+        }
+        nombre = JOptionPane.showInputDialog("Ingrese el nombre: ");
+        telefono = JOptionPane.showInputDialog("Ingrese el numero telefonico: ");
+        correo = JOptionPane.showInputDialog("Ingrese el correo: ");
+        Personas persona = new Personas(id, nombre, telefono, correo, true);
         personas.add(persona);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo cliente.");
     }
@@ -121,7 +129,7 @@ public class PersonasControllers implements Crudinterfaces {
                     JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
                     break;
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "No es posible eliminar ya que la persona tiene permisos de Usuario y/o empleado activo.");
             }
         }
@@ -135,15 +143,21 @@ public class PersonasControllers implements Crudinterfaces {
     public void visualizacion() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public void precarga(){
+
+    public void precarga() {
         Personas persona = new Personas();
         persona.setId("104880522");
         persona.setNombre("Ana vargas");
-        persona.setTelefono("8771-8525");
+        persona.setTelefono("8611-4617");
         persona.setCorreo("Ana_vargas@gmail.com");
         personas.add(persona);
-    
+        Personas persona1 = new Personas();
+        persona1.setId("115470088");
+        persona1.setNombre("Hector Hernandez");
+        persona1.setTelefono("8771-8525");
+        persona1.setCorreo("to_vargas@gmail.com");
+        personas.add(persona1);
+
     }
 
 }
