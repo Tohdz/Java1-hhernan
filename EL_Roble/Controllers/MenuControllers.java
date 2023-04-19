@@ -56,6 +56,7 @@ public class MenuControllers {
                             switch (opcion3) {
                                 case 0:
                                     usuarios.nuevo();
+                                    usuarios.disponibilidad();
                                     break;
                                 case 1:
                                     usuarios.modificar();
@@ -75,6 +76,7 @@ public class MenuControllers {
                             switch (opcion4) {
                                 case 0:
                                     choferes.nuevo();
+                                    choferes.disponibilidad();
                                     break;
                                 case 1:
                                     choferes.modificar();
@@ -120,6 +122,7 @@ public class MenuControllers {
                             switch (opcion5) {
                                 case 0:
                                     viajes.nuevo();
+                                    viajes.disponibilidad();
                                     break;
                                 case 1:
                                     viajes.modificar();

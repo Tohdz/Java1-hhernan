@@ -188,16 +188,47 @@ public class ViajesControllers implements Crudinterfaces {
                 break;
             }
         }
+        
+        for (int veh = 0; veh < vehiculo.getVehiculos().size(); veh++) {
+            for (int vi = 0; vi < viajes.size(); vi++) {
+                if ((vehiculo.getVehiculos().get(veh).getPlaca() != null ? viajes.get(vi).getPlacaV() != null : vehiculo.getVehiculos().get(veh).getPlaca().equals(viajes.get(vi).getPlacaV()))) {
+                    vehiculo.getVehiculos().get(veh).setDispo(true);
+                    break;
+                }
+            }
+        }
+        
     }
 
     @Override
     public void disponibilidad() {
+        for (int veh = 0; veh < vehiculo.getVehiculos().size(); veh++) {
+            for (int vi = 0; vi < viajes.size(); vi++) {
+                if ((vehiculo.getVehiculos().get(veh).getPlaca() == null ? viajes.get(vi).getPlacaV() == null : vehiculo.getVehiculos().get(veh).getPlaca().equals(viajes.get(vi).getPlacaV()))) {
+                    vehiculo.getVehiculos().get(veh).setDispo(false);
+                    break;
+                }
+            }
+        }
 
     }
 
     @Override
     public void visualizacion() {
 
+    }
+    
+    public void precarga(){
+        Viajes viaje = new Viajes();
+        viaje.setIdV("0");
+        viaje.setPlacaV("835477");
+        viaje.setIdChof("104880522");
+        viaje.setFechaV("8/8/88");
+        viaje.setDestino("Isla del coco");
+        viaje.setCapacidad(0);
+        viaje.setPrecio(0);
+        viajes.add(viaje);
+    
     }
 
 }

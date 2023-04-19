@@ -17,6 +17,7 @@ public class PersonasControllers implements Crudinterfaces {
 
     private static ArrayList<Personas> personas = new ArrayList();
 
+
     public static ArrayList<Personas> getPersonas() {
         return personas;
     }
@@ -59,7 +60,7 @@ public class PersonasControllers implements Crudinterfaces {
 
     @Override
     public void modificar() {
-        String[] ediciones = {"Numero de Identificacion", "Nombre", "Telefono", "Correo","Volver"};
+        String[] ediciones = {"Numero de Identificacion", "Nombre", "Telefono", "Correo", "Volver"};
         int editar = JOptionPane.showOptionDialog(null, "Editables", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, ediciones, "Numero Chasis");
         switch (editar) {
             case 0:
@@ -105,7 +106,7 @@ public class PersonasControllers implements Crudinterfaces {
             case 4:
                 break;
         }
-        if (editar!=4){
+        if (editar != 4) {
             JOptionPane.showMessageDialog(null, "Se ha modificado correctamente.");
         }
     }
@@ -114,22 +115,35 @@ public class PersonasControllers implements Crudinterfaces {
     public void eliminar() {
         String busqueda6 = JOptionPane.showInputDialog("Ingrese el numero de identificacion a eliminar: ");
         for (int i = 0; i < personas.size(); i++) {
-            if (busqueda6 == null ? personas.get(i).getId() == null : busqueda6.equals(personas.get(i).getId())) {
-                personas.remove(i);
-                JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
-                break;
+            if (personas.get(i).isDispo() == true) {
+                if (busqueda6 == null ? personas.get(i).getId() == null : busqueda6.equals(personas.get(i).getId())) {
+                    personas.remove(i);
+                    JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
+                    break;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "No es posible eliminar ya que la persona tiene permisos de Usuario y/o empleado activo.");
             }
         }
     }
 
     @Override
     public void disponibilidad() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void visualizacion() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public void precarga(){
+        Personas persona = new Personas();
+        persona.setId("104880522");
+        persona.setNombre("Ana vargas");
+        persona.setTelefono("8771-8525");
+        persona.setCorreo("Ana_vargas@gmail.com");
+        personas.add(persona);
+    
     }
 
 }

@@ -14,24 +14,18 @@ public class Vehiculos {
     private String estilo;
     private String año;
     private int pasajeros;
+    private boolean dispo;
 
     public Vehiculos() {
     }
 
-    public Vehiculos(String placa, String marca, String estilo, String año, int pasajeros) {
+    public Vehiculos(String placa, String marca, String estilo, String año, int pasajeros, boolean dispo) {
         this.placa = placa;
         this.marca = marca;
         this.estilo = estilo;
         this.año = año;
         this.pasajeros = pasajeros;
-    }
-
-    public int getPasajeros() {
-        return pasajeros;
-    }
-
-    public void setPasajeros(int pasajeros) {
-        this.pasajeros = pasajeros;
+        this.dispo = dispo;
     }
 
     public String getPlaca() {
@@ -66,8 +60,26 @@ public class Vehiculos {
         this.año = año;
     }
 
+    public int getPasajeros() {
+        return pasajeros;
+    }
+
+    public void setPasajeros(int pasajeros) {
+        this.pasajeros = pasajeros;
+    }
+
+    public boolean isDispo() {
+        return dispo;
+    }
+
+    public void setDispo(boolean dispo) {
+        this.dispo = dispo;
+    }
+
     @Override
     public String toString() {
-        return "Vehiculos{" + "placa=" + placa + ", marca=" + marca + ", estilo=" + estilo + ", a\u00f1o=" + año + ", pasajeros=" + pasajeros + '}';
+        return "Vehiculos{" + "placa=" + placa + ", marca=" + marca + ", estilo=" + estilo + ", a\u00f1o=" + año + ", pasajeros=" + pasajeros + ", dispo=" + dispo + '}';
     }
+
+    
 }

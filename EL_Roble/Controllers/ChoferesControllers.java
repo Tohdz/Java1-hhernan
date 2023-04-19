@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 public class ChoferesControllers implements Crudinterfaces{
     
     private static ArrayList<Choferes> choferes = new ArrayList();
+    PersonasControllers personas = new PersonasControllers();
 
     public static ArrayList<Choferes> getChoferes() {
         return choferes;
@@ -27,8 +28,12 @@ public class ChoferesControllers implements Crudinterfaces{
 
     @Override
     public void nuevo() {
+        String info="";
         Choferes chofer = new Choferes();
-        chofer.setIdC(JOptionPane.showInputDialog("Ingrese el numero de identificacion: "));
+        for (int v = 0; v < personas.getPersonas().size(); v++) {
+            info = info + ("Numero de id:" + personas.getPersonas().get(v).getId() + "\n");
+        }
+        chofer.setIdC(JOptionPane.showInputDialog(info+"Ingrese el numero de identificacion: "));
         chofer.setVencimientoL(JOptionPane.showInputDialog("Ingrese la fecha de vencimiento de su permiso: "));
         choferes.add(chofer);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo conductor.");
@@ -98,16 +103,39 @@ public class ChoferesControllers implements Crudinterfaces{
                 break;
             }
         }
+        for (int per = 0; per < personas.getPersonas().size(); per++) {
+            for (int cho = 0; cho < choferes.size(); cho++) {
+                if ((personas.getPersonas().get(per).getId() != null ? choferes.get(cho).getIdC() != null : personas.getPersonas().get(per).getId().equals(choferes.get(cho).getIdC()))) {
+                    personas.getPersonas().get(per).setDispo(true);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public void disponibilidad() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for (int per = 0; per < personas.getPersonas().size(); per++) {
+            for (int cho = 0; cho < choferes.size(); cho++) {
+                if ((personas.getPersonas().get(per).getId() == null ? choferes.get(cho).getIdC() == null : personas.getPersonas().get(per).getId().equals(choferes.get(cho).getIdC()))) {
+                    personas.getPersonas().get(per).setDispo(false);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public void visualizacion() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public void precarga(){
+        Choferes chofer = new Choferes();
+        chofer.setIdC("104880522");
+        chofer.setVencimientoL("24/4/23");
+        choferes.add(chofer);
+    
     }
     
 }

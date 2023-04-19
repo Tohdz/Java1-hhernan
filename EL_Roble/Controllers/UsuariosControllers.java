@@ -5,6 +5,7 @@
 package Controllers;
 
 import Crudinterfaces.Crudinterfaces;
+import Plantillas.Personas;
 import Plantillas.Usuarios;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 public class UsuariosControllers implements Crudinterfaces{
     
     private static ArrayList<Usuarios> usuarios = new ArrayList();
+    PersonasControllers personas = new PersonasControllers();
 
     public static ArrayList<Usuarios> getUsuarios() {
         return usuarios;
@@ -27,10 +29,15 @@ public class UsuariosControllers implements Crudinterfaces{
 
     @Override
     public void nuevo() {
-        Usuarios usuario = new Usuarios();
-        usuario.setIdU(JOptionPane.showInputDialog("Ingrese el numero de identificacion: "));
-        usuario.setCodigoU(JOptionPane.showInputDialog("Ingrese el codigo de usuario: "));
-        usuario.setClave(JOptionPane.showInputDialog("Ingrese la clave: "));
+        String idU="";
+        String info="";
+        for (int v = 0; v < personas.getPersonas().size(); v++) {
+            info = info + ("Numero de id:" + personas.getPersonas().get(v).getId() + "\n");
+        }
+        idU=JOptionPane.showInputDialog(info+"Ingrese el numero de identificacion: ");
+        String codigoU=JOptionPane.showInputDialog("Ingrese el codigo de usuario: ");
+        String clave=JOptionPane.showInputDialog("Ingrese la clave: ");
+        Usuarios usuario = new Usuarios(idU, codigoU, clave);
         usuarios.add(usuario);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo usuario.");
     }
@@ -109,15 +116,26 @@ public class UsuariosControllers implements Crudinterfaces{
                 break;
             }
         }
+        for (int per = 0; per < personas.getPersonas().size(); per++) {
+            for (int usu = 0; usu < usuarios.size(); usu++) {
+                if ((personas.getPersonas().get(per).getId() != null ? usuarios.get(usu).getIdU() != null : personas.getPersonas().get(per).getId().equals(usuarios.get(usu).getIdU()))) {
+                    personas.getPersonas().get(per).setDispo(true);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public void disponibilidad() {
-        Usuarios usuario = new Usuarios();
-        usuario.setIdU("115470088");
-        usuario.setCodigoU("0693");
-        usuario.setClave("to0693*");
-        usuarios.add(usuario);
+        for (int per = 0; per < personas.getPersonas().size(); per++) {
+            for (int usu = 0; usu < usuarios.size(); usu++) {
+                if ((personas.getPersonas().get(per).getId() == null ? usuarios.get(usu).getIdU() == null : personas.getPersonas().get(per).getId().equals(usuarios.get(usu).getIdU()))) {
+                    personas.getPersonas().get(per).setDispo(false);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -125,6 +143,13 @@ public class UsuariosControllers implements Crudinterfaces{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public void precarga(){
+        Usuarios usuario = new Usuarios();
+        usuario.setIdU("115470088");
+        usuario.setCodigoU("0693");
+        usuario.setClave("to0693*");
+        usuarios.add(usuario);
     
+    }
     
 }

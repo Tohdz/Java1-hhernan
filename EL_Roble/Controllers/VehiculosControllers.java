@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
  *
  * @author hhern
  */
-public class VehiculosControllers implements Crudinterfaces{
-    
+public class VehiculosControllers implements Crudinterfaces {
+
     private static ArrayList<Vehiculos> vehiculos = new ArrayList();
 
     public static ArrayList<Vehiculos> getVehiculos() {
@@ -24,26 +24,26 @@ public class VehiculosControllers implements Crudinterfaces{
     public static void setVehiculos(ArrayList<Vehiculos> aVehiculos) {
         vehiculos = aVehiculos;
     }
-    
+
     @Override
     public void nuevo() {
         String placa;
         String marca;
         String estilo;
         String año;
-        int pasajeros=0;
-        placa=JOptionPane.showInputDialog("Ingrese el numero de matricula: ");
-        marca=JOptionPane.showInputDialog("Ingrese la marca: ");
-        estilo=JOptionPane.showInputDialog("Ingrese el estilo: ");
-        año=JOptionPane.showInputDialog("Ingrese el año: ");
-        do{
-            try{
-                pasajeros=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de personas: "));
-            }catch(Exception e){
+        int pasajeros = 0;
+        placa = JOptionPane.showInputDialog("Ingrese el numero de matricula: ");
+        marca = JOptionPane.showInputDialog("Ingrese la marca: ");
+        estilo = JOptionPane.showInputDialog("Ingrese el estilo: ");
+        año = JOptionPane.showInputDialog("Ingrese el año: ");
+        do {
+            try {
+                pasajeros = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de personas: "));
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Ingrese un valor valido");
             }
-        }while(pasajeros<=0);
-        Vehiculos vehiculo = new Vehiculos(placa, marca, estilo, año, pasajeros);
+        } while (pasajeros <= 0);
+        Vehiculos vehiculo = new Vehiculos(placa, marca, estilo, año, pasajeros, true);
         vehiculos.add(vehiculo);
         JOptionPane.showMessageDialog(null, "Se ha agregado un nuevo vehiculo.");
     }
@@ -55,13 +55,13 @@ public class VehiculosControllers implements Crudinterfaces{
         switch (editar) {
             case 0:
                 for (int i = 0; i < vehiculos.size(); i++) {
-                    JOptionPane.showMessageDialog(null, "Numero de Matricula: " + vehiculos.get(i).getPlaca() + "\n" + "Marca: " + vehiculos.get(i).getMarca() + "\n"+ "Estilo: " + vehiculos.get(i).getEstilo() + "\n"+ "Año: " + vehiculos.get(i).getAño() + "\n"+ "Capacidad: " + vehiculos.get(i).getPasajeros() + "\n");
+                    JOptionPane.showMessageDialog(null, "Numero de Matricula: " + vehiculos.get(i).getPlaca() + "\n" + "Marca: " + vehiculos.get(i).getMarca() + "\n" + "Estilo: " + vehiculos.get(i).getEstilo() + "\n" + "Año: " + vehiculos.get(i).getAño() + "\n" + "Capacidad: " + vehiculos.get(i).getPasajeros() + "\n");
                 }
                 break;
             case 1:
                 String info1 = "";
                 for (int i = 0; i < vehiculos.size(); i++) {
-                    info1 = info1 + ("Numero de Matricula: " + vehiculos.get(i).getPlaca() + "\n" + "Marca: " + vehiculos.get(i).getMarca() + "\n"+ "Estilo: " + vehiculos.get(i).getEstilo() + "\n"+ "Año: " + vehiculos.get(i).getAño() + "\n"+ "Capacidad: " + vehiculos.get(i).getPasajeros() + "\n");
+                    info1 = info1 + ("Numero de Matricula: " + vehiculos.get(i).getPlaca() + "\n" + "Marca: " + vehiculos.get(i).getMarca() + "\n" + "Estilo: " + vehiculos.get(i).getEstilo() + "\n" + "Año: " + vehiculos.get(i).getAño() + "\n" + "Capacidad: " + vehiculos.get(i).getPasajeros() + "\n");
                 }
                 JOptionPane.showMessageDialog(null, info1);
                 break;
@@ -71,7 +71,7 @@ public class VehiculosControllers implements Crudinterfaces{
 
     @Override
     public void modificar() {
-        String[] ediciones = {"Numero de Matricula", "Marca", "Estilo", "Año","Capacidad","Volver"};
+        String[] ediciones = {"Numero de Matricula", "Marca", "Estilo", "Año", "Capacidad", "Volver"};
         int editar = JOptionPane.showOptionDialog(null, "Editables", "Seleccionar", 0, JOptionPane.QUESTION_MESSAGE, null, ediciones, "Numero Chasis");
         switch (editar) {
             case 0:
@@ -115,10 +115,10 @@ public class VehiculosControllers implements Crudinterfaces{
                 }
                 break;
             case 4:
-                int busqueda4=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
-                int nuevopasa=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la nueva capacidad: "));
+                int busqueda4 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese su busqueda: "));
+                int nuevopasa = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la nueva capacidad: "));
                 for (int i = 0; i < vehiculos.size(); i++) {
-                    if (busqueda4 ==nuevopasa) {
+                    if (busqueda4 == nuevopasa) {
                         vehiculos.get(i).setPasajeros(nuevopasa);
                         break;
                     }
@@ -127,7 +127,7 @@ public class VehiculosControllers implements Crudinterfaces{
             case 5:
                 break;
         }
-        if (editar!=5){
+        if (editar != 5) {
             JOptionPane.showMessageDialog(null, "Se ha modificado correctamente.");
         }
     }
@@ -136,10 +136,14 @@ public class VehiculosControllers implements Crudinterfaces{
     public void eliminar() {
         String busqueda6 = JOptionPane.showInputDialog("Ingrese el numero de matricula a eliminar: ");
         for (int i = 0; i < vehiculos.size(); i++) {
-            if (busqueda6 == null ? vehiculos.get(i).getPlaca() == null : busqueda6.equals(vehiculos.get(i).getPlaca())) {
-                vehiculos.remove(i);
-                JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
-                break;
+            if (vehiculos.get(i).isDispo() == true) {
+                if (busqueda6 == null ? vehiculos.get(i).getPlaca() == null : busqueda6.equals(vehiculos.get(i).getPlaca())) {
+                    vehiculos.remove(i);
+                    JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
+                    break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No es posible eliminar, ya que el vehiculo tiene viajes asignados.");
             }
         }
     }
@@ -154,6 +158,16 @@ public class VehiculosControllers implements Crudinterfaces{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
-    
+    public void precarga() {
+        Vehiculos vehiculo = new Vehiculos();
+        vehiculo.setPlaca("835477");
+        vehiculo.setMarca("volvo");
+        vehiculo.setEstilo("Wagon");
+        vehiculo.setAño("1999");
+        vehiculo.setPasajeros(1000);
+        vehiculo.setDispo(true);
+        vehiculos.add(vehiculo);
+
+    }
+
 }
