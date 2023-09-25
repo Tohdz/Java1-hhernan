@@ -1,0 +1,18 @@
+ int cont = 0;
+        String info;
+        do {
+            cont = 0;
+            info = JOptionPane.showInputDialog(null, "Ingrese un nombre:");
+            int ascii;
+            for (int i = 0; i < info.length(); i++) {
+                char caracter = info.charAt(i);
+                ascii = (int) caracter;
+                if (ascii < 97 || ascii > 122) {
+                    cont++;
+                }
+            }
+            if (cont >= 1) {
+                JOptionPane.showMessageDialog(null, "Ingrese caracter valido");
+            }
+        } while (cont >= 1);
+         JOptionPane.showMessageDialog(null, info);
