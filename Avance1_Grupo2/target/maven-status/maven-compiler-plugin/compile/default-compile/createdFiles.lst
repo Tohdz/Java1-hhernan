@@ -12,6 +12,7 @@ com\mycompany\Avance1_Grupo2\Menu1$2.class
 com\mycompany\Avance1_Grupo2\VentElimEspec$1.class
 com\mycompany\Avance1_Grupo2\VentAgregEspec$7.class
 com\mycompany\Avance1_Grupo2\VentConsClient.class
+com\mycompany\Avance1_Grupo2\VentModEspec.class
 com\mycompany\Avance1_Grupo2\VentAgregClients.class
 com\mycompany\Avance1_Grupo2\VentConsEmple$1.class
 com\mycompany\Avance1_Grupo2\Menu1$5.class
@@ -23,6 +24,7 @@ com\mycompany\Avance1_Grupo2\VentElimEspec$2.class
 com\mycompany\Avance1_Grupo2\VentElimEmple$2.class
 com\mycompany\Avance1_Grupo2\VentConsEspec.class
 com\mycompany\Avance1_Grupo2\VentAgregEspec$3.class
+com\mycompany\Avance1_Grupo2\VentModEspec$3.class
 com\mycompany\Avance1_Grupo2\Menu1$4.class
 com\mycompany\Avance1_Grupo2\Menu1$12.class
 com\mycompany\Avance1_Grupo2\VentModEmple.class
@@ -34,6 +36,7 @@ com\mycompany\Avance1_Grupo2\VentAgregEspec$6.class
 com\mycompany\Avance1_Grupo2\Menu1$10.class
 com\mycompany\Avance1_Grupo2\MecanicaBasica.class
 com\mycompany\Avance1_Grupo2\VentElimClient.class
+com\mycompany\Avance1_Grupo2\VentModEspec$2.class
 com\mycompany\Avance1_Grupo2\VentElimEmple.class
 com\mycompany\Avance1_Grupo2\MecanicaElectricos.class
 com\mycompany\Avance1_Grupo2\Menu1$7.class
@@ -57,6 +60,7 @@ com\mycompany\Avance1_Grupo2\VentConsEspec$1.class
 com\mycompany\Avance1_Grupo2\Menu1$6.class
 com\mycompany\Avance1_Grupo2\VentModEmple$1.class
 com\mycompany\Avance1_Grupo2\Especialidades.class
+com\mycompany\Avance1_Grupo2\VentModEspec$1.class
 com\mycompany\Avance1_Grupo2\VentElimClient$1.class
 com\mycompany\Avance1_Grupo2\VentAgregEspec$5.class
 com\mycompany\Avance1_Grupo2\VentAgregClients$1.class
@@ -64,5 +68,6 @@ com\mycompany\Avance1_Grupo2\Menu1$11.class
 com\mycompany\Avance1_Grupo2\VentModClient$2.class
 com\mycompany\Avance1_Grupo2\Menu1$9.class
 com\mycompany\Avance1_Grupo2\MecanicaDiesel.class
+com\mycompany\Avance1_Grupo2\Menu1$14.class
 com\mycompany\Avance1_Grupo2\VentAgregEspec$1.class
 com\mycompany\Avance1_Grupo2\VentAgregEmple$1.class
