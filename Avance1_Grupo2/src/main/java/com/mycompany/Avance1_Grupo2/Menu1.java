@@ -50,6 +50,7 @@ public class Menu1 extends javax.swing.JFrame {
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
+        jMenuItem14 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -187,9 +188,19 @@ public class Menu1 extends javax.swing.JFrame {
         jMenu5.setText("Reservas");
 
         jMenuItem16.setText("Agregar");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem16);
 
         jMenuItem17.setText("Consultar");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem17);
 
         jMenuBar1.add(jMenu5);
@@ -198,6 +209,15 @@ public class Menu1 extends javax.swing.JFrame {
         jMenuBar1.add(jMenu8);
 
         jMenu9.setText("Planilla");
+
+        jMenuItem14.setText("Factura");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem14);
+
         jMenuBar1.add(jMenu9);
 
         setJMenuBar(jMenuBar1);
@@ -292,6 +312,24 @@ public class Menu1 extends javax.swing.JFrame {
         mod.show();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        VentAgregCitas agreg = new VentAgregCitas();
+        escritorio.add(agreg);
+        agreg.show();
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        VentConsCitas cons = new VentConsCitas();
+        escritorio.add(cons);
+        cons.show();
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        Factura fac = new Factura();
+        escritorio.add(fac);
+        fac.show();
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -342,6 +380,7 @@ public class Menu1 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;

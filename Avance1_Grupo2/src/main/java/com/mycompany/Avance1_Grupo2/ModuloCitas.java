@@ -116,7 +116,7 @@ public class ModuloCitas {
 
     @Override
     public String toString() {
-        return "fecha_dia=" + fecha_dia + ", placaC=" + placaC + "==>";
+        return  "Placa: " + placaC + "Fecha de reserva: " + fecha_dia +"==>";
     }
 
     public void Reserva() {
