@@ -26,9 +26,11 @@ public class Factura extends javax.swing.JInternalFrame {
     }
 
     public void limpiar() {
-        for (int i = 0; i < tablaPro.getRowCount(); i++) {
-            model.removeRow(i);
-        }
+        DefaultTableModel model = (DefaultTableModel) tablaPro.getModel();
+        model.setRowCount(0);
+//        for (int i = 0; i < tablaPro.getRowCount(); i++) {
+//            model.removeRow(i);
+//        }
     }
 
     public void modelotabla() {
@@ -476,9 +478,10 @@ public class Factura extends javax.swing.JInternalFrame {
     private void datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datosActionPerformed
         String plac = placaBusc.getSelectedItem().toString();
         String ser = serv.getSelectedItem().toString();
+        PreparedStatement busc=null;
         try {
             String sql = "SELECT nom_cli,plac_cli,esp,ser,sub_ser,pre FROM servicios WHERE plac_cli=? AND ser=?";
-            PreparedStatement busc = connect.prepareStatement(sql);
+            busc = connect.prepareStatement(sql);
             busc.setString(1, plac);
             busc.setString(2, ser);
             ResultSet rs = busc.executeQuery();

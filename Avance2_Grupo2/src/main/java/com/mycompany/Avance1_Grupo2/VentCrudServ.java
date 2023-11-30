@@ -34,6 +34,8 @@ public class VentCrudServ extends javax.swing.JInternalFrame {
         java.sql.Date fecha_sql = new java.sql.Date(fech);
 
     }
+    
+    
 
     public void listar(String tabla) {
         String sql = "select * from " + tabla;

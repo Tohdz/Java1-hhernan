@@ -38,8 +38,9 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
         model.addColumn("Telefono");
         model.addColumn("Correo");
         model.addColumn("Especialidad");
+        model.addColumn("% incentivos");
         table_mec.setModel(model);
-        String[] datos = new String[6];
+        String[] datos = new String[7];
         try {
             St = conexion.createStatement();
             ResultSet rs = St.executeQuery(sql);
@@ -50,6 +51,7 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
                 datos[3] = rs.getString(4);
                 datos[4] = rs.getString(5);
                 datos[5] = rs.getString(6);
+                datos[6] = rs.getString(7);
                 model.addRow(datos);
             }
         } catch (SQLException ex) {
@@ -184,17 +186,17 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
 
         table_mec.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Identificacion", "Nombre", "Direccion", "Telefono", "Correo", "Especialidad"
+                "Identificacion", "Nombre", "Direccion", "Telefono", "Correo", "Especialidad", "% incentivos"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
