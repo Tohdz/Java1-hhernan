@@ -45,7 +45,8 @@ public class Factura extends javax.swing.JInternalFrame {
 
     public void listar(String tabla) {
         String sql = "select * from " + tabla;
-        Statement St;
+        Statement St=null;
+        ResultSet rs=null;
         Conexion cone = new Conexion();
         Connection conexion = cone.conectar();
         DefaultTableModel model = new DefaultTableModel();
@@ -58,7 +59,7 @@ public class Factura extends javax.swing.JInternalFrame {
         String[] datos = new String[5];
         try {
             St = conexion.createStatement();
-            ResultSet rs = St.executeQuery(sql);
+            rs = St.executeQuery(sql);
             while (rs.next()) {
                 datos[0] = rs.getString(1);
                 datos[1] = rs.getString(2);
@@ -68,7 +69,18 @@ public class Factura extends javax.swing.JInternalFrame {
                 model.addRow(datos);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al extraer datos" + ex.getMessage());
+            JOptionPane.showMessageDialog(null,  ex.getMessage());
+        }finally {
+            try {
+                if (St != null) {
+                    St.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }
 
@@ -479,40 +491,62 @@ public class Factura extends javax.swing.JInternalFrame {
         String plac = placaBusc.getSelectedItem().toString();
         String ser = serv.getSelectedItem().toString();
         PreparedStatement busc=null;
+        ResultSet rs=null;
         try {
             String sql = "SELECT nom_cli,plac_cli,esp,ser,sub_ser,pre FROM servicios WHERE plac_cli=? AND ser=?";
             busc = connect.prepareStatement(sql);
             busc.setString(1, plac);
             busc.setString(2, ser);
-            ResultSet rs = busc.executeQuery();
+            rs = busc.executeQuery();
             if (rs.next()) {
                 nom.setText(rs.getString("nom_cli"));
                 espe.setText(rs.getString("esp"));
                 servi.setText(rs.getString("ser"));
                 subservi.setText(rs.getString("sub_ser"));
                 preci.setText(rs.getString("pre"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron resultados");
-            }
+            } 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Placas no agregadas");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    busc.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }//GEN-LAST:event_datosActionPerformed
 
     private void placaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaActionPerformed
         placaBusc.removeAllItems();
+        Statement busc=null;
+        ResultSet rs=null;
         try {
             String sql = "SELECT DISTINCT plac_cli FROM servicios";
-            Statement busc = connect.createStatement();
-            ResultSet rs = busc.executeQuery(sql);
+            busc = connect.createStatement();
+            rs = busc.executeQuery(sql);
             while (rs.next()) {
                 String valor = rs.getString("plac_cli");
                 placaBusc.addItem(valor);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Placas no agregadas");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    busc.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
-
     }//GEN-LAST:event_placaActionPerformed
 
     private void subserviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subserviActionPerformed
@@ -525,17 +559,30 @@ public class Factura extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         serv.removeAllItems();
+        PreparedStatement busc=null;
+        ResultSet rs=null;
         try {
             String sql = "SELECT DISTINCT ser FROM servicios WHERE plac_cli=?";
-            PreparedStatement busc = connect.prepareStatement(sql);
+            busc = connect.prepareStatement(sql);
             busc.setString(1, placaBusc.getSelectedItem().toString());
-            ResultSet rs = busc.executeQuery();
+            rs = busc.executeQuery();
             while (rs.next()) {
                 String valor = rs.getString("ser");
                 serv.addItem(valor);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Servicios no agregadas");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    busc.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -559,7 +606,7 @@ public class Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        PreparedStatement save=null;
         String info = "";
         for (int i = 0; i < tablaPro.getRowCount(); i++) {
             for (int j = 2; j <= 4; j++) {
@@ -570,7 +617,7 @@ public class Factura extends javax.swing.JInternalFrame {
             }
         }
         try {
-            PreparedStatement save = connect.prepareStatement("INSERT INTO facturas(nom_cli,placa,ser,pre) VALUES(?,?,?,?)");
+            save = connect.prepareStatement("INSERT INTO facturas(nom_cli,placa,ser,pre) VALUES(?,?,?,?)");
             save.setString(1, tablaPro.getValueAt(0, 0).toString());
             save.setString(2, tablaPro.getValueAt(0, 1).toString());
             save.setString(3, info);
@@ -578,7 +625,15 @@ public class Factura extends javax.swing.JInternalFrame {
             save.execute();
             JOptionPane.showMessageDialog(null, "Factura registrada con exito");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Factura no registrada");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (save != null) {
+                    save.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
         listar("facturas");
         limpiar();

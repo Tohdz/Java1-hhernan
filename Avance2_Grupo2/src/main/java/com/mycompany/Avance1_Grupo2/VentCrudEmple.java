@@ -28,7 +28,8 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
 
     public void listar(String tabla) {
         String sql = "select * from " + tabla;
-        Statement St;
+        Statement St = null;
+        ResultSet rs = null;
         Conexion cone = new Conexion();
         Connection conexion = cone.conectar();
         DefaultTableModel model = new DefaultTableModel();
@@ -43,7 +44,7 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
         String[] datos = new String[7];
         try {
             St = conexion.createStatement();
-            ResultSet rs = St.executeQuery(sql);
+            rs = St.executeQuery(sql);
             while (rs.next()) {
                 datos[0] = rs.getString(1);
                 datos[1] = rs.getString(2);
@@ -55,7 +56,18 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
                 model.addRow(datos);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al extraer datos" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } finally {
+            try {
+                if (St != null) {
+                    St.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }
 
@@ -70,9 +82,10 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
             String tel = textTelefono.getText();
             String cor = textCorreo.getText();
             String esp = textEspecialidad.getSelectedItem().toString();
+            PreparedStatement modi = null;
             try {
                 String sql = "UPDATE mecanicos SET nom_mec=?, dir_mec=?, tel_mec=?, corr_mec=?, esp_mec=? WHERE id_mec=?";
-                PreparedStatement modi = connect.prepareStatement(sql);
+                modi = connect.prepareStatement(sql);
                 modi.setString(1, nom);
                 modi.setString(2, dir);
                 modi.setString(3, tel);
@@ -82,7 +95,15 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
                 modi.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Empleado modificado con exito");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage() + "Empleado no fue modificado");
+                JOptionPane.showMessageDialog(null, e.getMessage() );
+            } finally {
+                try {
+                    if (modi != null) {
+                        modi.close();
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
             textCedula.setText("");
             textNombre.setText("");
@@ -98,15 +119,24 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Se debe seleccionar una fila");
         } else {
+            PreparedStatement del=null;
             try {
                 String sql = "delete from mecanicos where id_mec=?";
                 int id = Integer.parseInt(textCedula.getText());
-                PreparedStatement del = connect.prepareStatement(sql);
+                del = connect.prepareStatement(sql);
                 del.setInt(1, id);
                 del.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Empleado eliminado con exito");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage() + "Empleado no fue eliminado");
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            } finally {
+                try {
+                    if (del != null) {
+                        del.close();
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
             textCedula.setText("");
             textNombre.setText("");
@@ -301,8 +331,9 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        PreparedStatement save=null;
         try {
-            PreparedStatement save = connect.prepareStatement("INSERT INTO mecanicos(id_mec,nom_mec,dir_mec,tel_mec,corr_mec,esp_mec,incentivo) VALUES(?,?,?,?,?,?,?)");
+            save = connect.prepareStatement("INSERT INTO mecanicos(id_mec,nom_mec,dir_mec,tel_mec,corr_mec,esp_mec,incentivo) VALUES(?,?,?,?,?,?,?)");
             save.setString(1, textCedula.getText());
             save.setString(2, textNombre.getText());
             save.setString(3, textDireccion.getText());
@@ -313,8 +344,16 @@ public class VentCrudEmple extends javax.swing.JInternalFrame {
             save.execute();
             JOptionPane.showMessageDialog(null, "Empleado registrado con exito");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Empleado no fue registrado");
-        }
+            JOptionPane.showMessageDialog(null, e.getMessage() );
+        }finally {
+                try {
+                    if (save != null) {
+                        save.close();
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+            }
         textCedula.setText("");
         textNombre.setText("");
         textDireccion.setText("");

@@ -149,9 +149,17 @@ public class CitasDias extends javax.swing.JInternalFrame {
                 }
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Error al encontrar fechas");
+            JOptionPane.showMessageDialog(null, e.getMessage());
         } catch (ParseException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

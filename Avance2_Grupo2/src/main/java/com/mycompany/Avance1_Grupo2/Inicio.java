@@ -18,7 +18,7 @@ public class Inicio extends javax.swing.JFrame {
 
     Conexion con = new Conexion();
     Connection connect = con.conectar();
-    
+
     public Inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -120,25 +120,39 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ResultSet rs = null;
+        PreparedStatement busc = null;
         try {
             String sql = "SELECT correo, contraseña FROM login";
-            PreparedStatement busc = connect.prepareStatement(sql);
-            ResultSet rs = busc.executeQuery();
-            while(rs.next()){
-                if (user.getText().equalsIgnoreCase(rs.getString(1))&&passw.getText().equalsIgnoreCase(rs.getString(2))) {
+            busc = connect.prepareStatement(sql);
+            rs = busc.executeQuery();
+            while (rs.next()) {
+                if (user.getText().equalsIgnoreCase(rs.getString(1)) && passw.getText().equalsIgnoreCase(rs.getString(2))) {
                     Menu menu = new Menu();
                     menu.show();
                     dispose();
-                }else{
-                    JOptionPane.showMessageDialog(null, "Credenciales incorrectas" );
+                } else {
+                    JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
                 }
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al extraer datos" + e.getMessage());
+        } finally {
+            // Close the connection in the finally block to ensure it's closed even if an exception occurs
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         user.setText("");
         passw.setText("");
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void passwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwActionPerformed

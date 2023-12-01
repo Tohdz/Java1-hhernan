@@ -137,16 +137,29 @@ public class reporteReparaciones extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         placaBusc.removeAllItems();
         Statement busc = null;
+        ResultSet rs = null;
         try {
             String sql = "SELECT DISTINCT plac_cli FROM servicios";
             busc = connect.createStatement();
-            ResultSet rs = busc.executeQuery(sql);
+            rs = busc.executeQuery(sql);
             while (rs.next()) {
                 String valor = rs.getString("plac_cli");
                 placaBusc.addItem(valor);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Placas no agregadas");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            // Close the connection in the finally block to ensure it's closed even if an exception occurs
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -154,11 +167,12 @@ public class reporteReparaciones extends javax.swing.JInternalFrame {
         limpiar();
         String plac = placaBusc.getSelectedItem().toString();
         PreparedStatement busc = null;
+        ResultSet rs = null;
         try {
             String sql = "SELECT nom_mec,esp,ser,sub_ser,fecha FROM servicios WHERE plac_cli=?";
             busc = connect.prepareStatement(sql);
             busc.setString(1, plac);
-            ResultSet rs = busc.executeQuery();
+            rs = busc.executeQuery();
             String[] datos = new String[5];
             while (rs.next()) {
                 datos[0] = rs.getString("nom_mec");
@@ -170,6 +184,18 @@ public class reporteReparaciones extends javax.swing.JInternalFrame {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage() + "Placas no agregadas");
+        } finally {
+            // Close the connection in the finally block to ensure it's closed even if an exception occurs
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

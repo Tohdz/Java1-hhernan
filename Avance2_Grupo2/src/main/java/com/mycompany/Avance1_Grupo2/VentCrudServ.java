@@ -34,12 +34,11 @@ public class VentCrudServ extends javax.swing.JInternalFrame {
         java.sql.Date fecha_sql = new java.sql.Date(fech);
 
     }
-    
-    
 
     public void listar(String tabla) {
         String sql = "select * from " + tabla;
-        Statement St;
+        Statement St = null;
+        ResultSet rs = null;
         Conexion cone = new Conexion();
         Connection conexion = cone.conectar();
         DefaultTableModel model = new DefaultTableModel();
@@ -57,7 +56,7 @@ public class VentCrudServ extends javax.swing.JInternalFrame {
         String[] datos = new String[10];
         try {
             St = conexion.createStatement();
-            ResultSet rs = St.executeQuery(sql);
+            rs = St.executeQuery(sql);
             while (rs.next()) {
                 datos[0] = rs.getString(1);
                 datos[1] = rs.getString(2);
@@ -73,6 +72,18 @@ public class VentCrudServ extends javax.swing.JInternalFrame {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al extraer datos" + ex.getMessage());
+        } finally {
+            // Close the connection in the finally block to ensure it's closed even if an exception occurs
+            try {
+                if (St != null) {
+                    St.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -84,15 +95,25 @@ public class VentCrudServ extends javax.swing.JInternalFrame {
             int fila = table_esp.getSelectedRow();
             String txt = precio.getText();
             String txt2 = (String) table_esp.getValueAt(fila, 2);
+            PreparedStatement modi = null;
             try {
                 String sql = "UPDATE servicios SET pre=? WHERE plac_cli=?";
-                PreparedStatement modi = connect.prepareStatement(sql);
+                modi = connect.prepareStatement(sql);
                 modi.setString(1, txt);
                 modi.setString(2, txt2);
                 modi.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Servicio modificado con exito");
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage() + "Servicio no modificado");
+            } finally {
+                // Close the connection in the finally block to ensure it's closed even if an exception occurs
+                try {
+                    if (modi != null) {
+                        modi.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
             precio.setText("");
             listar("servicios");
@@ -104,16 +125,26 @@ public class VentCrudServ extends javax.swing.JInternalFrame {
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Se debe seleccionar una fila");
         } else {
+            PreparedStatement del = null;
             try {
                 int fila = table_esp.getSelectedRow();
                 String sql = "delete from servicios where ident=?";
-                String iden = (String)table_esp.getValueAt(fila, 0);
-                PreparedStatement del = connect.prepareStatement(sql);
+                String iden = (String) table_esp.getValueAt(fila, 0);
+                del = connect.prepareStatement(sql);
                 del.setString(1, iden);
                 del.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Servicio  eliminado con exito");
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage() + "Servicio no eliminado");
+            } finally {
+                // Close the connection in the finally block to ensure it's closed even if an exception occurs
+                try {
+                    if (del != null) {
+                        del.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
             precio.setText("");
             listar("servicios");
@@ -423,33 +454,61 @@ public class VentCrudServ extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         placaBusc.removeAllItems();
+        Statement busc = null;
+        ResultSet rs = null;
         try {
             String sql = "SELECT placa_cli FROM clientes";
-            Statement busc = connect.createStatement();
-            ResultSet rs = busc.executeQuery(sql);
+            busc = connect.createStatement();
+            rs = busc.executeQuery(sql);
             while (rs.next()) {
                 String valor = rs.getString("placa_cli");
                 placaBusc.addItem(valor);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage() + "Placas no agregadas");
+        } finally {
+            // Close the connection in the finally block to ensure it's closed even if an exception occurs
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         mecBusc.removeAllItems();
         String esp_sel = Especialidades.getSelectedItem().toString();
+        PreparedStatement busc = null;
+        ResultSet rs = null;
         try {
             String sql = "SELECT nom_mec FROM mecanicos WHERE esp_mec= ?";
-            PreparedStatement busc = connect.prepareStatement(sql);
+            busc = connect.prepareStatement(sql);
             busc.setString(1, esp_sel);
-            ResultSet rs = busc.executeQuery();
+            rs = busc.executeQuery();
             while (rs.next()) {
                 String valor = rs.getString("nom_mec");
                 mecBusc.addItem(valor);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage() + "Placas no agregadas");
+        } finally {
+            // Close the connection in the finally block to ensure it's closed even if an exception occurs
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -514,13 +573,14 @@ public class VentCrudServ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+        PreparedStatement busc = null;
+        ResultSet rs = null;
         try {
             String id = placaBusc.getSelectedItem().toString();
             String sql = "SELECT nombre_cli FROM clientes WHERE placa_cli= ?";
-            PreparedStatement busc = connect.prepareStatement(sql);
+            busc = connect.prepareStatement(sql);
             busc.setString(1, id);
-            ResultSet rs = busc.executeQuery();
+            rs = busc.executeQuery();
             String nul = subBusc.getSelectedItem() != null ? subBusc.getSelectedItem().toString() : "-";
             Date fecha = date.getDate();
             long fech = fecha.getTime();
@@ -543,6 +603,18 @@ public class VentCrudServ extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Servicio registrado con exito");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage() + "Servicio no registrado");
+        } finally {
+            // Close the connection in the finally block to ensure it's closed even if an exception occurs
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         precio.setText("");
         listar("servicios");

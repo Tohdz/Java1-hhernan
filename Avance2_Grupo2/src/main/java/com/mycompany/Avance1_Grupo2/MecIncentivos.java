@@ -128,27 +128,40 @@ public class MecIncentivos extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         mecBusc.removeAllItems();
         Statement busc = null;
+        ResultSet rs=null;
         try {
             String sql = "SELECT nom_mec FROM mecanicos";
             busc = connect.createStatement();
-            ResultSet rs = busc.executeQuery(sql);
+            rs = busc.executeQuery(sql);
             while (rs.next()) {
                 String valor = rs.getString("nom_mec");
                 mecBusc.addItem(valor);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Mecanicos no encontrados");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         limpiar();
         Statement busc = null;
+        ResultSet rs=null;
         int cont = 0;
         try {
             String sql = "SELECT nom_mec FROM servicios";
             busc = connect.createStatement();
-            ResultSet rs = busc.executeQuery(sql);
+            rs = busc.executeQuery(sql);
             String nomMec = "";
             while (rs.next()) {
                 nomMec = rs.getString("nom_mec");
@@ -159,20 +172,40 @@ public class MecIncentivos extends javax.swing.JInternalFrame {
             String[] datos = {nomMec, String.valueOf(cont)};
             model.addRow(datos);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Error al comparar empleados");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
+        PreparedStatement preparedStatement=null;
         try {
             String nomMecActualizar = incent.getValueAt(0, 0).toString();
             String incentivoActualizar = incent.getValueAt(0, 1).toString();
             String sqlUpdate = "UPDATE mecanicos SET incentivo=? WHERE nom_mec=?";
-            PreparedStatement preparedStatement = connect.prepareStatement(sqlUpdate);
+            preparedStatement = connect.prepareStatement(sqlUpdate);
             preparedStatement.setString(1, incentivoActualizar);
             preparedStatement.setString(2, nomMecActualizar);
             preparedStatement.executeUpdate();
             System.out.println(nomMecActualizar);
             System.out.println(incentivoActualizar);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Error al actualizar incentivo");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

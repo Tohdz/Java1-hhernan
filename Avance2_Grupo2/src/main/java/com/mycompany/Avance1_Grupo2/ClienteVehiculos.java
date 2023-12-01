@@ -132,16 +132,28 @@ public class ClienteVehiculos extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         nombres.removeAllItems();
         Statement busc = null;
+        ResultSet rs=null;
         try {
             String sql = "SELECT DISTINCT nombre_cli FROM clientes";
             busc = connect.createStatement();
-            ResultSet rs = busc.executeQuery(sql);
+            rs = busc.executeQuery(sql);
             while (rs.next()) {
                 String valor = rs.getString("nombre_cli");
                 nombres.addItem(valor);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "clientes no agregados");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    busc.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -149,11 +161,12 @@ public class ClienteVehiculos extends javax.swing.JInternalFrame {
         limpiar();
         String nom = nombres.getSelectedItem().toString();
         PreparedStatement busc = null;
+        ResultSet rs=null;
         try {
             String sql = "SELECT placa_cli, modelo_cli, marca_cli, color_cli, año_cli, combustible_cli FROM clientes WHERE nombre_cli=?";
             busc = connect.prepareStatement(sql);
             busc.setString(1, nom);
-            ResultSet rs = busc.executeQuery();
+            rs = busc.executeQuery();
             String[] datos = new String[6];
             while (rs.next()) {
                 datos[0] = rs.getString("placa_cli");
@@ -165,7 +178,18 @@ public class ClienteVehiculos extends javax.swing.JInternalFrame {
                 model.addRow(datos);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage() + "Placas no agregadas");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally {
+            try {
+                if (busc != null) {
+                    busc.close();
+                }
+                if (rs != null) {
+                    busc.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
